@@ -1,0 +1,352 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.daemon.airticket.MainActivity" >
+
+    <include layout="@layout/layout_title" >
+    </include>
+
+    <ScrollView
+        android:id="@+id/sv_order"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:background="@color/bg_gray"
+        android:scrollbars="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:orientation="vertical" >
+
+            <!-- 乘机人列表 -->
+
+            <com.daemon.customview.ListViewForScrollView
+                android:id="@+id/lv_order_passengerInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:dividerHeight="0.5dp" />
+            <!-- 更多乘机人 -->
+
+            <Button
+                android:id="@+id/btn_order_morePassenger"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_selector_frame"
+                android:gravity="center_vertical|left"
+                android:padding="15dp"
+                android:text="@string/order_add_passengers"
+                android:textColor="@color/title_color"
+                android:textSize="16dp" />
+            <!-- 空险列表 -->
+
+            <com.daemon.customview.ListViewForScrollView
+                android:id="@+id/lv_order_insure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:divider="@drawable/line"
+                android:listSelector="@drawable/bg_selector" />
+            <!-- 联系手机和邮箱 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="#ffffff"
+                android:divider="@drawable/line"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:showDividers="middle" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_selector"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:text="联系手机"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <com.daemon.customview.CustomEditText
+                        android:id="@+id/et_order_phoneNum"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="8"
+                        android:background="@null"
+                        android:drawableRight="@drawable/submit_edit_clear_normal"
+                        android:hint="11位手机号码"
+                        android:inputType="phone"
+                        android:maxLength="11"
+                        android:paddingRight="15dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_selector"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:text="联系邮箱"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <com.daemon.customview.CustomEditText
+                        android:id="@+id/et_order_email"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="8"
+                        android:background="@null"
+                        android:drawableRight="@drawable/submit_edit_clear_normal"
+                        android:hint="（选填）请输入邮箱"
+                        android:paddingRight="15dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 配送方式 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="#ffffff"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="3"
+                    android:text="配送方式"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/btn_order_destribute"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="8"
+                    android:background="@null"
+                    android:drawableRight="@drawable/ic_xiangyou"
+                    android:gravity="left|center_vertical"
+                    android:paddingRight="15dp"
+                    android:text="快递"
+                    android:textColor="#111111"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <!-- 配送详情 -->
+
+            <LinearLayout
+                android:id="@+id/linearLayout_order_destribute"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_selector_frame"
+                android:divider="@drawable/line"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:showDividers="middle" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_selector"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:text="发票抬头"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <com.daemon.customview.CustomEditText
+                        android:id="@+id/et_order_invoiceTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="8"
+                        android:background="@null"
+                        android:drawableRight="@drawable/submit_edit_clear_normal"
+                        android:hint="请填写发票抬头"
+                        android:paddingRight="15dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_selector"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:text="收件人"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <com.daemon.customview.CustomEditText
+                        android:id="@+id/et_order_receiver"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="8"
+                        android:background="@null"
+                        android:drawableRight="@drawable/submit_edit_clear_normal"
+                        android:hint="请填写收件人姓名"
+                        android:paddingRight="15dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_selector"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:text="所在城市"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/et_order_city"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="8"
+                        android:background="@null"
+                        android:drawableRight="@drawable/ic_xiangyou"
+                        android:gravity="center_vertical|left"
+                        android:hint="请选择所在城市"
+                        android:paddingRight="15dp"
+                        android:textColor="@color/font_gray" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_selector"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:text="详细地址"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <com.daemon.customview.CustomEditText
+                        android:id="@+id/et_order_address"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="8"
+                        android:background="@null"
+                        android:drawableRight="@drawable/submit_edit_clear_normal"
+                        android:hint="请填写详细地址"
+                        android:paddingRight="15dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_selector"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:text="收件人手机"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <com.daemon.customview.CustomEditText
+                        android:id="@+id/et_order_receiverPhone"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="8"
+                        android:background="@null"
+                        android:drawableRight="@drawable/submit_edit_clear_normal"
+                        android:hint="请填写收件人11位手机号"
+                        android:inputType="phone"
+                        android:maxLength="11"
+                        android:paddingRight="15dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- 总价和提交订单 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/title_color"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="4"
+            android:gravity="center_vertical"
+            android:text="测试"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2" >
+
+            <Button
+                android:id="@+id/btn_airticket_search"
+                android:layout_width="88dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:background="#ffffff"
+                android:text="@string/order_commit"
+                android:textColor="@color/title_color"
+                android:textSize="@dimen/button_textSize" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

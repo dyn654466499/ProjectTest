@@ -1,0 +1,89 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:divider="@drawable/line"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:showDividers="middle" >
+
+    <!-- 出发日期 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="3"
+            android:gravity="center_vertical|left"
+            android:text="@string/order_name"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <com.daemon.customview.CustomEditText
+            android:id="@+id/et_order_passengers"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="8"
+            android:background="@null"
+            android:drawableRight="@drawable/submit_edit_clear_normal"
+            android:gravity="left|center_vertical"
+            android:hint="@string/order_passengers"
+            android:paddingRight="15dp"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!-- 舱位选择 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <TextView
+            android:id="@+id/tv_order_cert"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="3"
+            android:gravity="center_vertical|left"
+            android:text="@string/order_cert"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <com.daemon.customview.CustomEditText
+            android:id="@+id/et_order_cert"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="6"
+            android:background="@null"
+            android:drawableRight="@drawable/submit_edit_clear_normal"
+            android:paddingRight="3dp"
+            android:drawablePadding="3dp"
+            android:gravity="left|center_vertical"
+            android:hint="@string/order_cert_num"
+            android:textSize="16sp" />
+        
+        <Button 
+            android:id="@+id/btn_order_moreCert"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|right"
+            android:layout_weight="2"
+            android:background="@null"
+            android:text="更多证件"
+            android:textSize="14sp"
+            android:textColor="@color/title_color"
+            />
+    </LinearLayout>
+
+</LinearLayout>

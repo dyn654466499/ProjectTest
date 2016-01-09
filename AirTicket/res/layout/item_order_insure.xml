@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#ffffff"
+    android:orientation="horizontal"
+    android:padding="15dp" 
+    android:descendantFocusability= "blocksDescendants"
+    >
+
+    <TextView
+        android:id="@+id/tv_order_insure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        android:text="标题"
+        android:textSize="16sp" />
+    
+    <ImageButton 
+        android:id="@+id/imageBtn_order_insureDesc"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="25dp"
+        android:src="@drawable/kongxian"
+        android:background="@null"
+        android:focusable = "false"
+        />
+
+        <TextView
+        android:id="@+id/tv_order_insure_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        android:text="$40"
+        android:textColor="@color/title_color"
+        android:textSize="14sp" />
+        
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        android:text="/份"
+        android:textColor="@color/font_gray"
+        android:textSize="14sp" />
+      
+     <TextView
+        android:id="@+id/tv_order_insure_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        android:drawableRight="@drawable/ic_duigou_lan" />      
+</LinearLayout>

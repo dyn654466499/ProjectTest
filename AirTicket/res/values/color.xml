@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="title_color">#0080ff</color>
+    <color name="bg_gray">#e4e4e4</color>
+    <color name="font_gray">#848484</color>
+    <color name="font_deep_gray">#545454</color>
+    <color name="white">#ffffff</color>
+    
+    <color name="activitytransparent">#a000</color>
+    
+    
+        <color name="calendar_color_green">#60c677</color>
+    <color name="calendar_color_orange">#fc6c00</color>
+    <color name="calendar_color_black">#666666</color>
+    <color name="calendar_color_gray">#cccccc</color>
+    <color name="calendar_color_month_title">#526276</color>
+    <color name="calendar_color_white">#ffffff</color>
+    
+</resources>
