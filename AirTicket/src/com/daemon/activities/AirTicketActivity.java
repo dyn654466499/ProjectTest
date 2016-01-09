@@ -150,12 +150,17 @@ public class AirTicketActivity extends BaseActivity {
 			
 			linearLayout_airticket_backDate.setVisibility(View.VISIBLE);
 			break;
-		case R.id.btn_airticket_leave:
 			
+		case R.id.btn_airticket_leave:
+			intent = new Intent();
+			intent.setClass(AirTicketActivity.this, CitySearchActivity.class);
+			startActivityForResult(intent, REQUEST_CODE_CITY_LEAVE);
 			break;
 
 		case R.id.btn_airticket_arrive:
-			
+			intent = new Intent();
+			intent.setClass(AirTicketActivity.this, CitySearchActivity.class);
+			startActivityForResult(intent, REQUEST_CODE_CITY_ARRIVE);
 			break;
 
 		case R.id.btn_airticket_date:
@@ -231,6 +236,16 @@ public class AirTicketActivity extends BaseActivity {
 				setResult(RESULT_OK, getIntent().putExtra(TYPE_DATE_KEY, time_back));
 				btn_airticket_backDate.setText((Calendar_back.get(Calendar.MONTH) + 1) + "月"
 						                + Calendar_back.get(Calendar.DAY_OF_MONTH) + "日");
+				break;
+				
+			case REQUEST_CODE_CITY_LEAVE:
+				String city_leave = data.getStringExtra(KEY_CITY);
+				btn_airticket_leave.setText(city_leave);
+				break;
+				
+			case REQUEST_CODE_CITY_ARRIVE:
+				String city_arrive = data.getStringExtra(KEY_CITY);
+				btn_airticket_arrive.setText(city_arrive);
 				break;
 				
 			default:

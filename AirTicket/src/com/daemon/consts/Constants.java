@@ -16,8 +16,8 @@ public class Constants {
 	
 	public static final String TITLE_DATE_KEY = "标题";
 	
-	public static final String KEY_CITY_LEAVE = "出发城市";
-	public static final String KEY_CITY_ARRIVE = "到达城市";
+	public static final String KEY_CITY = "城市";
+	//public static final String KEY_CITY_ARRIVE = "到达城市";
 	
 	public static final String KEY_INSURE_PRICE = "保险价格";
 	public static final String KEY_INSURE_NAME = "保险名称";
@@ -29,6 +29,9 @@ public class Constants {
 	public static final int REQUEST_CODE_DATE = 102;
 	public static final int REQUEST_CODE_BACK_DATE = 103;
 	public static final int REQUEST_CODE_DISTRIBUTE = 104;
+	public static final int REQUEST_CODE_CITY_LEAVE = 105;
+	public static final int REQUEST_CODE_CITY_ARRIVE = 106;
+	public static final int REQUEST_CODE_CITY = 107;
 	public static HashMap<String, String>  HOLIDAYS = new HashMap<String, String>();
 	static {
 		HOLIDAYS.put("2014-1-1", "元旦");

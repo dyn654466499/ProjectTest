@@ -8,7 +8,7 @@
     android:paddingLeft="10dp"
     android:showDividers="middle" >
 
-    <!-- 出发日期 -->
+    <!-- 乘客姓名 -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    <!-- 舱位选择 -->
+    <!-- 证件类型 -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,7 +60,7 @@
             android:textSize="16sp" />
 
         <com.daemon.customview.CustomEditText
-            android:id="@+id/et_order_cert"
+            android:id="@+id/et_order_certNum"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -71,6 +71,7 @@
             android:drawablePadding="3dp"
             android:gravity="left|center_vertical"
             android:hint="@string/order_cert_num"
+            android:inputType="number"
             android:textSize="16sp" />
         
         <Button 

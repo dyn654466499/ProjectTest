@@ -9,6 +9,10 @@
     <string name="button_search">开始搜索</string>
     <string name="sure">确定</string>
     <string name="cancel">取消</string>
+    
+       <string name="string_back">返回</string>
+    <string name="string_search_hit">搜索中文/城市简拼</string>
+    <string name="string_hot_city">热门城市</string>
 
     <!-- 标题 -->
     <string name="title_airTicket">机票</string>
@@ -99,6 +103,15 @@
         <item>Y</item>
         <item>Z</item>
     </string-array>
+    
+        <!-- 热门城市 -->
+
+    <string-array name="hot_city">
+        <item>北京</item>
+        <item>广州</item>
+        <item>上海</item>
+    </string-array>
+    
     <string-array name="CityNames">
         <item>北京首都</item>
         <item>上海虹桥</item>

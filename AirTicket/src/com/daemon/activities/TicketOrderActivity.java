@@ -62,7 +62,8 @@ public class TicketOrderActivity extends BaseActivity{
 		 * 乘机人列表
 		 */
 		ListView lv_order_passengerInfo = (ListView)findViewById(R.id.lv_order_passengerInfo);
-		if(passengerAdapter == null)passengerAdapter = new OrderPassengerAdapter(this, item_sums, certType_positions);
+		if(passengerAdapter == null)
+			passengerAdapter = new OrderPassengerAdapter(this, item_sums, certType_positions);
 		lv_order_passengerInfo.setAdapter(passengerAdapter);
 		
 		/**

@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.daemon.activities.SelectActivity;
@@ -23,14 +24,14 @@ import com.daemon.airticket.R;
 public class OrderPassengerAdapter extends BaseAdapter{
 
 	private Activity activity;
-	private int count=1;
+	private int item_sums=0;
 	private SparseIntArray certType_positions;
 	private String[] cert_types;
 	private ArrayList<ViewHolder> holders;
 	public OrderPassengerAdapter(Activity mContext, int count,SparseIntArray type_positions) {
 		super();
 		this.activity = mContext;
-		this.count = count;
+		this.item_sums = count;
 		this.certType_positions = type_positions;
 		cert_types = activity.getResources().getStringArray(R.array.TypeCert);
 		holders = new ArrayList<OrderPassengerAdapter.ViewHolder>();
@@ -38,9 +39,7 @@ public class OrderPassengerAdapter extends BaseAdapter{
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
-		if(count < 1)count=1;
-		return count;
+		return item_sums;
 	}
 
 	@Override
@@ -56,7 +55,7 @@ public class OrderPassengerAdapter extends BaseAdapter{
 	}
 
 	public void setItemCount(int count){
-		this.count = count;
+		this.item_sums = count;
 	}
 	
 	
@@ -78,6 +77,10 @@ public class OrderPassengerAdapter extends BaseAdapter{
 			holder = new ViewHolder();
 			convertView = LayoutInflater.from(activity).inflate(R.layout.item_order_passenger_info, null,false);
 			holder.tv_order_cert = (TextView)convertView.findViewById(R.id.tv_order_cert);
+			
+			holder.et_order_passengers = (EditText)convertView.findViewById(R.id.et_order_passengers);
+			holder.et_order_certNum = (EditText)convertView.findViewById(R.id.et_order_certNum);
+			
 			holder.btn_order_moreCert = (Button)convertView.findViewById(R.id.btn_order_moreCert);
 			holder.btn_order_moreCert.setOnClickListener(new OnClickListener() {
 				
@@ -101,22 +104,27 @@ public class OrderPassengerAdapter extends BaseAdapter{
 			});
 			
 			convertView.setTag(holder);
-			//Log.e("if", "position = "+position);
+			Log.e("if", "position = "+position);
 		}else{
 			holder = (ViewHolder)convertView.getTag();
-			/**
-			 * 记录点击哪位乘机人“更多证件”的位置
-			 */
-			holder.btn_order_moreCert.setTag(position);
-			//Log.e("else", "position = "+position);
+			Log.e("else", "position = "+position);
+			holder.tv_order_cert.setText(holder.tv_order_cert.getText().toString());
+			holder.et_order_passengers.setText(holder.et_order_passengers.getText().toString());
+			holder.et_order_certNum.setText(holder.et_order_certNum.getText().toString());
 		}
+		/**
+		 * 记录点击哪位乘机人“更多证件”的位置
+		 */
+		holder.btn_order_moreCert.setTag(position);
 		if(!holders.contains(holder))holders.add(holder);
+
 		return convertView;
 	}
 	
 	static class ViewHolder{
 		TextView tv_order_cert;
 		Button btn_order_moreCert;
+		EditText et_order_passengers,et_order_certNum;
 	}
 
 }
