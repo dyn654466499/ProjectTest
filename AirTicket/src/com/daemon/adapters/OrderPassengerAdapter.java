@@ -90,7 +90,8 @@ public class OrderPassengerAdapter extends BaseAdapter{
 			holder.et_order_certNum = (EditText)convertView.findViewById(R.id.et_order_certNum);
 			
 			holder.btn_order_moreCert = (Button)convertView.findViewById(R.id.btn_order_moreCert);
-           
+            holder.btn_order_deleteItem = (Button)convertView.findViewById(R.id.btn_order_deleteItem);
+            
 			convertView.setTag(holder);
 			//Log.e("if", "position = "+position);
 
@@ -128,7 +129,7 @@ public class OrderPassengerAdapter extends BaseAdapter{
 
 	static class ViewHolder{
 		TextView tv_order_cert;
-		Button btn_order_moreCert;
+		Button btn_order_moreCert,btn_order_deleteItem;
 		EditText et_order_passengers,et_order_certNum;
 	}
 

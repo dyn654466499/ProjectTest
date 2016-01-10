@@ -143,6 +143,19 @@ public class TicketOrderActivity extends BaseActivity{
 
 			passengerAdapter.notifyDataSetChanged();
 			break;
+	
+//		case R.id.btn_order_deleteItem:
+//			item_sums--;
+//			//certType_positions.append(item_sums-1, 0);
+//			passengerAdapter.setType_positions(certType_positions);
+//			passengerAdapter.setItemCount(item_sums);
+//			/**
+//			 * 在乘机人adapter刷新前，让空险列表（或其他列表）获取焦点，这样就导致乘机人的editText失去焦点，从而数据不改变。
+//			 */
+//			lv_order_insure.requestFocus();
+//
+//			passengerAdapter.notifyDataSetChanged();
+//			break;
 			
 		case R.id.btn_back:
 			DialogUtil.showDialog(TicketOrderActivity.this, getString(R.string.title_order_edit), "您正在填写订单，是否要退出？", new Commands() {
@@ -172,6 +185,7 @@ public class TicketOrderActivity extends BaseActivity{
 			intent.setClass(TicketOrderActivity.this, CitySearchActivity.class);
 			startActivityForResult(intent, REQUEST_CODE_CITY);
 			break;
+			
 		default:
 			break;
 		}

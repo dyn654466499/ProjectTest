@@ -110,7 +110,7 @@ public final class R {
         public static final int title_corner=0x7f020021;
     }
     public static final class id {
-        public static final int action_settings=0x7f0c0037;
+        public static final int action_settings=0x7f0c0038;
         public static final int btn_airticket_arrive=0x7f0c000b;
         public static final int btn_airticket_backDate=0x7f0c000f;
         public static final int btn_airticket_date=0x7f0c000d;
@@ -121,13 +121,14 @@ public final class R {
         public static final int btn_airticket_spaceType=0x7f0c0010;
         public static final int btn_back=0x7f0c0000;
         public static final int btn_order_city=0x7f0c001d;
+        public static final int btn_order_deleteItem=0x7f0c002b;
         public static final int btn_order_destribute=0x7f0c0019;
         public static final int btn_order_endorse=0x7f0c0013;
-        public static final int btn_order_moreCert=0x7f0c002d;
+        public static final int btn_order_moreCert=0x7f0c002e;
         public static final int btn_order_morePassenger=0x7f0c0015;
         public static final int edt_search=0x7f0c0001;
         public static final int et_order_address=0x7f0c001e;
-        public static final int et_order_certNum=0x7f0c002c;
+        public static final int et_order_certNum=0x7f0c002d;
         public static final int et_order_email=0x7f0c0018;
         public static final int et_order_invoiceTitle=0x7f0c001b;
         public static final int et_order_passengers=0x7f0c002a;
@@ -152,20 +153,20 @@ public final class R {
         public static final int tv_cal_month=0x7f0c0025;
         public static final int tv_cal_year=0x7f0c0024;
         public static final int tv_city_name=0x7f0c0023;
-        public static final int tv_endorse_change_desc=0x7f0c0031;
-        public static final int tv_endorse_change_title=0x7f0c0030;
-        public static final int tv_endorse_desc=0x7f0c0033;
-        public static final int tv_endorse_refund_desc=0x7f0c002f;
-        public static final int tv_endorse_refund_title=0x7f0c002e;
-        public static final int tv_endorse_title=0x7f0c0032;
-        public static final int tv_insure_desc=0x7f0c0035;
-        public static final int tv_insure_desc_title=0x7f0c0034;
-        public static final int tv_order_cert=0x7f0c002b;
+        public static final int tv_endorse_change_desc=0x7f0c0032;
+        public static final int tv_endorse_change_title=0x7f0c0031;
+        public static final int tv_endorse_desc=0x7f0c0034;
+        public static final int tv_endorse_refund_desc=0x7f0c0030;
+        public static final int tv_endorse_refund_title=0x7f0c002f;
+        public static final int tv_endorse_title=0x7f0c0033;
+        public static final int tv_insure_desc=0x7f0c0036;
+        public static final int tv_insure_desc_title=0x7f0c0035;
+        public static final int tv_order_cert=0x7f0c002c;
         public static final int tv_order_insure=0x7f0c0026;
         public static final int tv_order_insure_item=0x7f0c0029;
         public static final int tv_order_insure_price=0x7f0c0028;
         public static final int tv_select_title=0x7f0c0006;
-        public static final int tv_title=0x7f0c0036;
+        public static final int tv_title=0x7f0c0037;
     }
     public static final class layout {
         public static final int activity_city_search=0x7f030000;
