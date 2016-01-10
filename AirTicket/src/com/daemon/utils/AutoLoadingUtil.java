@@ -11,14 +11,14 @@ import android.widget.ImageView;
 
 import com.daemon.airticket.R;
 
-public class AutoLoadingUtils {
+public class AutoLoadingUtil {
 	private static View view;
 	private static ViewGroup rootView;
 	private static ArrayList<View> saveView;
 	
 	public static void setAutoLoadingView(ViewGroup rootView){
 		if(rootView != null){
-		AutoLoadingUtils.rootView =rootView;
+		AutoLoadingUtil.rootView =rootView;
 		view = LayoutInflater.from(rootView.getContext()).inflate(R.layout.autoloading, rootView, false);
 		saveView = new ArrayList<View>();
 		
@@ -47,20 +47,20 @@ public class AutoLoadingUtils {
 	}
 	
 	public static void cancelAutoLoadingView(){
-		if(AutoLoadingUtils.rootView != null && view != null){
-			AutoLoadingUtils.rootView.removeView(view);
+		if(AutoLoadingUtil.rootView != null && view != null){
+			AutoLoadingUtil.rootView.removeView(view);
 			saveView.remove(view);
 			for (View view : saveView) {
-				AutoLoadingUtils.rootView.addView(view);
+				AutoLoadingUtil.rootView.addView(view);
 			}
 			view = null;
-			AutoLoadingUtils.rootView = null;
+			AutoLoadingUtil.rootView = null;
 			saveView = null;
 		}
 	}
 	
 	public static void showFailView(){
-		if(AutoLoadingUtils.rootView != null){
+		if(AutoLoadingUtil.rootView != null){
 			 
 		}
 	}

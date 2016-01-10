@@ -162,7 +162,7 @@ public final class R {
     }
     public static final class layout {
         public static final int activity_city_search=0x7f030000;
-        public static final int activity_date_select=0x7f030001;
+        public static final int activity_date_pick=0x7f030001;
         public static final int activity_select=0x7f030002;
         public static final int activity_ticket=0x7f030003;
         public static final int activity_ticket_order=0x7f030004;

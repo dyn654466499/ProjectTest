@@ -17,14 +17,14 @@ import android.os.Environment;
  * @author sy
  *
  */
-public class DBManager {
+public class DBUtil {
 	private final int BUFFER_SIZE = 400000;
 	public static final String DB_NAME = "china_city.db";
 	public  String DB_PATH; // 存放路径
 	private Context mContext;
 	private SQLiteDatabase database;
 
-	public DBManager(Context context) {
+	public DBUtil(Context context) {
 		this.mContext = context;
 		DB_PATH=context.getFilesDir().getPath();
 	}

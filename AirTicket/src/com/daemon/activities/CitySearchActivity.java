@@ -26,8 +26,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daemon.airticket.R;
-import com.daemon.beans.CityModel;
-import com.daemon.utils.DBManager;
+import com.daemon.beans.CityInfo;
+import com.daemon.utils.DBUtil;
 
 import static com.daemon.consts.Constants.*;
 public class CitySearchActivity extends BaseActivity {
@@ -40,9 +40,9 @@ public class CitySearchActivity extends BaseActivity {
 	private Button btn_back;
 
 	private SQLiteDatabase database;
-	private ArrayList<CityModel> mCityNames;
+	private ArrayList<CityInfo> mCityNames;
 
-	private DBManager mDBManager;
+	private DBUtil mDBManager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class CitySearchActivity extends BaseActivity {
 		mCityLit = (ListView) findViewById(R.id.lv_city);
 		edtSearch = (EditText) findViewById(R.id.edt_search);
 		btn_back = (Button) findViewById(R.id.btn_back);
-		mDBManager = new DBManager(this);
+		mDBManager = new DBUtil(this);
 
 		/**
 		 * 点击事件
@@ -102,7 +102,7 @@ public class CitySearchActivity extends BaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// TODO Auto-generated method stub
-				CityModel model = (CityModel) adapter.getItem(position);
+				CityInfo model = (CityInfo) adapter.getItem(position);
 
 				if (!model.isItem()) {
 					Intent i = new Intent();
@@ -149,18 +149,18 @@ public class CitySearchActivity extends BaseActivity {
 	 * 
 	 * @return
 	 */
-	private ArrayList<CityModel> getCityNames() {
-		ArrayList<CityModel> names = new ArrayList<CityModel>();
+	private ArrayList<CityInfo> getCityNames() {
+		ArrayList<CityInfo> names = new ArrayList<CityInfo>();
 
 		// 获取热门城市
 		String[] hotCity = getResources().getStringArray(R.array.hot_city);
-		CityModel hotItem = new CityModel();
+		CityInfo hotItem = new CityInfo();
 		hotItem.setAllName(getResources().getString(R.string.string_hot_city));
 		hotItem.setItem(true);
 		names.add(hotItem);
 		
 		for (String string : hotCity) {
-			CityModel temp = new CityModel();
+			CityInfo temp = new CityInfo();
 			temp.setAllName(string);
 			temp.setItem(false);
 			names.add(temp);
@@ -170,21 +170,21 @@ public class CitySearchActivity extends BaseActivity {
 		Cursor cursor = database.rawQuery("SELECT * FROM T_city ORDER BY CityName", null);
 		for (int i = 0; i < cursor.getCount(); i++) {
 			cursor.moveToPosition(i);
-			CityModel cityModel = new CityModel();
+			CityInfo cityModel = new CityInfo();
 			cityModel.setAllName(cursor.getString(cursor.getColumnIndex("AllNameSort")));
 			cityModel.setCityName(cursor.getString(cursor.getColumnIndex("CityName")));
 			cityModel.setNameSort(cursor.getString(cursor.getColumnIndex("NameSort")));
 			cityModel.setItem(false);
 
 			if (i == 0) {
-				CityModel cityItem = new CityModel();
+				CityInfo cityItem = new CityInfo();
 				cityItem.setAllName(cityModel.getCityName());
 				cityItem.setItem(true);
 				names.add(cityItem);
 			} else {
-				CityModel lastCityModel = names.get(names.size() - 1);
+				CityInfo lastCityModel = names.get(names.size() - 1);
 				if (!cityModel.getCityName().equalsIgnoreCase(lastCityModel.getCityName()) && !lastCityModel.isItem()) {
-					CityModel cityItem = new CityModel();
+					CityInfo cityItem = new CityInfo();
 					cityItem.setAllName(cityModel.getCityName());
 					cityItem.setItem(true);
 					names.add(cityItem);
@@ -196,8 +196,8 @@ public class CitySearchActivity extends BaseActivity {
 		return names;
 	}
 
-	private ArrayList<CityModel> getSelectCityNames(String con) {
-		ArrayList<CityModel> names = new ArrayList<CityModel>();
+	private ArrayList<CityInfo> getSelectCityNames(String con) {
+		ArrayList<CityInfo> names = new ArrayList<CityInfo>();
 		// 判断查询的内容是不是汉字
 		Pattern p_str = Pattern.compile("[\\u4e00-\\u9fa5]+");
 		Matcher m = p_str.matcher(con);
@@ -210,7 +210,7 @@ public class CitySearchActivity extends BaseActivity {
 		Cursor cursor = database.rawQuery(sqlString, null);
 		for (int i = 0; i < cursor.getCount(); i++) {
 			cursor.moveToPosition(i);
-			CityModel cityModel = new CityModel();
+			CityInfo cityModel = new CityInfo();
 			cityModel.setAllName(cursor.getString(cursor.getColumnIndex("AllNameSort")));
 			cityModel.setCityName(cursor.getString(cursor.getColumnIndex("CityName")));
 			cityModel.setNameSort(cursor.getString(cursor.getColumnIndex("NameSort")));
@@ -224,9 +224,9 @@ public class CitySearchActivity extends BaseActivity {
 	class CityAdapter extends BaseAdapter {
 
 		private LayoutInflater inflater;
-		private List<CityModel> list;
+		private List<CityInfo> list;
 
-		public CityAdapter(Context context, List<CityModel> list) {
+		public CityAdapter(Context context, List<CityInfo> list) {
 			// TODO Auto-generated constructor stub
 			this.inflater = LayoutInflater.from(context);
 			this.list = list;
@@ -238,7 +238,7 @@ public class CitySearchActivity extends BaseActivity {
 			return list.size();
 		}
 
-		public void setList(List<CityModel> list) {
+		public void setList(List<CityInfo> list) {
 			this.list = list;
 			notifyDataSetChanged();
 		}
@@ -258,7 +258,6 @@ public class CitySearchActivity extends BaseActivity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
-
 			if (list.get(position).isItem()) {
 				convertView = inflater.inflate(R.layout.item_city_search_tag, null);
 				TextView tv = (TextView) convertView.findViewById(R.id.tv_city_name);

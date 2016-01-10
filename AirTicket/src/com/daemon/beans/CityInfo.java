@@ -5,7 +5,7 @@ package com.daemon.beans;
  * @author sy
  *
  */
-public class CityModel
+public class CityInfo
 {
 	private String CityName; //城市名字
 	private String NameSort; //城市首字母

@@ -37,7 +37,7 @@
             android:gravity="left|center_vertical"
             android:hint="@string/order_passengers"
             android:paddingRight="15dp"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
     </LinearLayout>
 
     <!-- 证件类型 -->

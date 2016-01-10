@@ -8,7 +8,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DateTimeUtils {
+public class DateTimeUtil {
 	public static final int DATETIME_FIELD_REFERSH = 20;
 	public static final String HH_mm = "HH:mm";
 	public static final String HH_mm_ss = "HH:mm:ss";

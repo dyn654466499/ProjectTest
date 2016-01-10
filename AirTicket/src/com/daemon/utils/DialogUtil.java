@@ -14,7 +14,7 @@ import com.daemon.interfaces.Commands;
  * @author 邓耀宁
  *
  */
-public class DialogUtils {
+public class DialogUtil {
 
 	/**
 	 * 通过命令模式设置Dialog按确定键后所执行的命令。

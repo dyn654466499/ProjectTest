@@ -11,7 +11,7 @@ import com.daemon.adapters.OrderInsureAdapter;
 import com.daemon.adapters.OrderPassengerAdapter;
 import com.daemon.airticket.R;
 import com.daemon.interfaces.Commands;
-import com.daemon.utils.DialogUtils;
+import com.daemon.utils.DialogUtil;
 import com.daemon.utils.ScreenUtil;
 
 import android.content.Intent;
@@ -128,7 +128,7 @@ public class TicketOrderActivity extends BaseActivity{
 			break;
 			
 		case R.id.btn_back:
-			DialogUtils.showDialog(TicketOrderActivity.this, getString(R.string.title_order_edit), "您正在填写订单，是否要退出？", new Commands() {
+			DialogUtil.showDialog(TicketOrderActivity.this, getString(R.string.title_order_edit), "您正在填写订单，是否要退出？", new Commands() {
 				
 				@Override
 				public void executeCommand() {
@@ -155,7 +155,7 @@ public class TicketOrderActivity extends BaseActivity{
 		// TODO Auto-generated method stub
 		switch (keyCode) {
 		case KeyEvent.KEYCODE_BACK:
-            DialogUtils.showDialog(TicketOrderActivity.this, getString(R.string.title_order_edit), "您正在填写订单，是否要退出？", new Commands() {
+            DialogUtil.showDialog(TicketOrderActivity.this, getString(R.string.title_order_edit), "您正在填写订单，是否要退出？", new Commands() {
 				
 				@Override
 				public void executeCommand() {
