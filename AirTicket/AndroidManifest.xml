@@ -71,35 +71,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="com.daemon.activities.CitySearchActivity"
             android:screenOrientation="portrait" >
         </activity>
-        
         <activity
             android:name="com.daemon.activities.TicketOrderActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            >
         </activity>
-
         <activity
             android:name="com.daemon.activities.DatePickActivity"
             android:screenOrientation="portrait" >
         </activity>
-        
         <activity
             android:name="com.daemon.activities.SelectActivity"
             android:screenOrientation="portrait"
-             android:theme="@style/ActivityTransparent" 
-            >
+            android:theme="@style/ActivityTransparent" >
+        </activity>
+        <activity
+            android:name="com.daemon.activities.EndorseActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ActivityTransparent" >
         </activity>
     </application>
 
-        <supports-screens
+    <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
         android:normalScreens="true"
         android:resizeable="true"
         android:smallScreens="true" />
-        
+
 </manifest>

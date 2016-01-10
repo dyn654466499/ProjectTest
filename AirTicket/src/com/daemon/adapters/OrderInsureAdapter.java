@@ -6,6 +6,8 @@ import static com.daemon.consts.Constants.KEY_INSURE_PRICE;
 import java.util.List;
 import java.util.Map;
 
+import org.xmlpull.v1.XmlPullParserFactory;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.util.Log;
@@ -15,9 +17,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.daemon.airticket.R;
+import com.daemon.utils.ScreenUtil;
 
 public class OrderInsureAdapter extends BaseAdapter{
     private List<? extends Map<String, ?>> data;
@@ -72,13 +77,19 @@ public class OrderInsureAdapter extends BaseAdapter{
 					/**
 					 * 弹出空险说明
 					 */
-					View view = LayoutInflater.from(mContext).inflate(R.layout.layout_insure_desc, null,false);
-					TextView tv_insure_desc_title = (TextView)view.findViewById(R.id.tv_insure_desc_title);
+					
+					LinearLayout layout = (LinearLayout)LayoutInflater.from(mContext).inflate(R.layout.layout_insure_desc, null,false);
+					int width = ScreenUtil.px2dip(mContext, 690f);
+					int height = ScreenUtil.px2dip(mContext, 1000f);
+					LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
+					
+					layout.setLayoutParams(params);
+					TextView tv_insure_desc_title = (TextView)layout.findViewById(R.id.tv_insure_desc_title);
 					tv_insure_desc_title.setText((String)data.get(position).get(KEY_INSURE_NAME));
 					
-					TextView tv_insure_desc = (TextView)view.findViewById(R.id.tv_insure_desc);
+					TextView tv_insure_desc = (TextView)layout.findViewById(R.id.tv_insure_desc);
 					
-					new AlertDialog.Builder(mContext).setView(view).create().show();
+					new AlertDialog.Builder(mContext).setView(layout).create().show();
 				}
 			});
 			convertView.setTag(holder);

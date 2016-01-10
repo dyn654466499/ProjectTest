@@ -34,7 +34,11 @@ import android.widget.TextView;
 import static com.daemon.consts.Constants.*;
 public class TicketOrderActivity extends BaseActivity{
 
-	private Button btn_order_morePassenger,btn_order_destribute; 
+	private Button btn_order_morePassenger,
+	btn_order_destribute,
+	btn_order_endorse,
+	btn_order_city
+	; 
 	/**
 	 * 保存各个乘机人的证件类型位置
 	 */
@@ -107,6 +111,9 @@ public class TicketOrderActivity extends BaseActivity{
 		linearLayout_order_destribute = (LinearLayout)findViewById(R.id.linearLayout_order_destribute);
 		linearLayout_order_destribute.setVisibility(View.GONE);
 		
+		btn_order_endorse = (Button) findViewById(R.id.btn_order_endorse);
+		btn_order_endorse.setOnClickListener(this);
+		
 		TextView tv_title = (TextView)findViewById(R.id.tv_title);
 		tv_title.setText(getString(R.string.title_order_edit));
 		
@@ -145,6 +152,16 @@ public class TicketOrderActivity extends BaseActivity{
 			startActivityForResult(intent,REQUEST_CODE_DISTRIBUTE);
 			overridePendingTransition(0, 0);
 			break;
+			
+		case R.id.btn_order_endorse:
+			startActivity(new Intent(TicketOrderActivity.this,EndorseActivity.class));
+			break;
+		
+		case R.id.btn_order_city:
+			intent = new Intent();
+			intent.setClass(TicketOrderActivity.this, CitySearchActivity.class);
+			startActivityForResult(intent, REQUEST_CODE_CITY);
+			break;
 		default:
 			break;
 		}
@@ -181,7 +198,7 @@ public class TicketOrderActivity extends BaseActivity{
 				int type_position = data.getIntExtra(TYPE_POSITION_KEY, 0);
 				int view_position = data.getIntExtra(TYPE_VIEW_POSITION_KEY, 0);
 				
-				//showTip("type_position="+type_position+",view_position="+view_position);
+				showTip("type_position="+type_position+",view_position="+view_position);
 				certType_positions.put(view_position, type_position); 
 				
 				passengerAdapter.setCertType(view_position, type_position);
@@ -204,6 +221,13 @@ public class TicketOrderActivity extends BaseActivity{
 					});
 				}
 				btn_order_destribute.setText(data.getStringExtra(TYPE_TICKET_DISTRIBUTE_KEY));
+				
+				btn_order_city = (Button) findViewById(R.id.btn_order_city);
+				btn_order_city.setOnClickListener(this);
+				break;
+			
+			case REQUEST_CODE_CITY:
+				btn_order_city.setText(data.getStringExtra(KEY_CITY));
 				break;
 				
 			default:

@@ -74,6 +74,14 @@
     <!-- 城市列表 -->
     <string name="hint_citylist_search">搜索中文/全拼</string>
 
+    <!-- 退改签说明 -->
+    <string name="title_endorse_refund">退票条件</string>
+    <string name="endorse_refund_desc" formatted="false">起飞前2小时之前的产品退订手续费按产品价收取50%，起飞前2小时（含）以内和起飞后不支持产品退订；</string>
+    <string name="title_endorse_change">更改条件</string>
+    <string name="endorse_change_desc" formatted="false">起飞前2小时之前的改期手续费按产品价收取30%，起飞前2小时（含）以内及起飞后的收取50%；改期费与升舱费同时发生，需同时收取。</string>
+    <string name="title_endorse">签转条件</string>
+    <string name="endorse_desc">不得签转</string>
+    
     <string-array name="CityTags">
         <item>热门</item>
         <item>A</item>

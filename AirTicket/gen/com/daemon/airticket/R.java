@@ -110,7 +110,7 @@ public final class R {
         public static final int title_corner=0x7f020021;
     }
     public static final class id {
-        public static final int action_settings=0x7f0c0030;
+        public static final int action_settings=0x7f0c0037;
         public static final int btn_airticket_arrive=0x7f0c000b;
         public static final int btn_airticket_backDate=0x7f0c000f;
         public static final int btn_airticket_date=0x7f0c000d;
@@ -120,45 +120,52 @@ public final class R {
         public static final int btn_airticket_search=0x7f0c0011;
         public static final int btn_airticket_spaceType=0x7f0c0010;
         public static final int btn_back=0x7f0c0000;
-        public static final int btn_order_destribute=0x7f0c0018;
-        public static final int btn_order_moreCert=0x7f0c002c;
-        public static final int btn_order_morePassenger=0x7f0c0014;
+        public static final int btn_order_city=0x7f0c001d;
+        public static final int btn_order_destribute=0x7f0c0019;
+        public static final int btn_order_endorse=0x7f0c0013;
+        public static final int btn_order_moreCert=0x7f0c002d;
+        public static final int btn_order_morePassenger=0x7f0c0015;
         public static final int edt_search=0x7f0c0001;
-        public static final int et_order_address=0x7f0c001d;
-        public static final int et_order_certNum=0x7f0c002b;
-        public static final int et_order_city=0x7f0c001c;
-        public static final int et_order_email=0x7f0c0017;
-        public static final int et_order_invoiceTitle=0x7f0c001a;
-        public static final int et_order_passengers=0x7f0c0029;
-        public static final int et_order_phoneNum=0x7f0c0016;
-        public static final int et_order_receiver=0x7f0c001b;
-        public static final int et_order_receiverPhone=0x7f0c001e;
+        public static final int et_order_address=0x7f0c001e;
+        public static final int et_order_certNum=0x7f0c002c;
+        public static final int et_order_email=0x7f0c0018;
+        public static final int et_order_invoiceTitle=0x7f0c001b;
+        public static final int et_order_passengers=0x7f0c002a;
+        public static final int et_order_phoneNum=0x7f0c0017;
+        public static final int et_order_receiver=0x7f0c001c;
+        public static final int et_order_receiverPhone=0x7f0c001f;
         public static final int imageBtn_airticket_fanxiang=0x7f0c000c;
-        public static final int imageBtn_order_insureDesc=0x7f0c0026;
-        public static final int imageView_autoLoading=0x7f0c0020;
+        public static final int imageBtn_order_insureDesc=0x7f0c0027;
+        public static final int imageView_autoLoading=0x7f0c0021;
         public static final int linearLayout_airticket_backDate=0x7f0c000e;
         public static final int linearLayout_date_pick=0x7f0c0004;
-        public static final int linearLayout_order_destribute=0x7f0c0019;
+        public static final int linearLayout_order_destribute=0x7f0c001a;
         public static final int linearLayout_select_blank=0x7f0c0005;
         public static final int listView_select=0x7f0c0007;
         public static final int lv_city=0x7f0c0002;
-        public static final int lv_order_insure=0x7f0c0015;
-        public static final int lv_order_passengerInfo=0x7f0c0013;
-        public static final int relativeLayout_autoLoading=0x7f0c001f;
+        public static final int lv_order_insure=0x7f0c0016;
+        public static final int lv_order_passengerInfo=0x7f0c0014;
+        public static final int relativeLayout_autoLoading=0x7f0c0020;
         public static final int scrollView_date_pick=0x7f0c0003;
         public static final int sv_order=0x7f0c0012;
-        public static final int tv_autoLoading=0x7f0c0021;
-        public static final int tv_cal_month=0x7f0c0024;
-        public static final int tv_cal_year=0x7f0c0023;
-        public static final int tv_city_name=0x7f0c0022;
-        public static final int tv_insure_desc=0x7f0c002e;
-        public static final int tv_insure_desc_title=0x7f0c002d;
-        public static final int tv_order_cert=0x7f0c002a;
-        public static final int tv_order_insure=0x7f0c0025;
-        public static final int tv_order_insure_item=0x7f0c0028;
-        public static final int tv_order_insure_price=0x7f0c0027;
+        public static final int tv_autoLoading=0x7f0c0022;
+        public static final int tv_cal_month=0x7f0c0025;
+        public static final int tv_cal_year=0x7f0c0024;
+        public static final int tv_city_name=0x7f0c0023;
+        public static final int tv_endorse_change_desc=0x7f0c0031;
+        public static final int tv_endorse_change_title=0x7f0c0030;
+        public static final int tv_endorse_desc=0x7f0c0033;
+        public static final int tv_endorse_refund_desc=0x7f0c002f;
+        public static final int tv_endorse_refund_title=0x7f0c002e;
+        public static final int tv_endorse_title=0x7f0c0032;
+        public static final int tv_insure_desc=0x7f0c0035;
+        public static final int tv_insure_desc_title=0x7f0c0034;
+        public static final int tv_order_cert=0x7f0c002b;
+        public static final int tv_order_insure=0x7f0c0026;
+        public static final int tv_order_insure_item=0x7f0c0029;
+        public static final int tv_order_insure_price=0x7f0c0028;
         public static final int tv_select_title=0x7f0c0006;
-        public static final int tv_title=0x7f0c002f;
+        public static final int tv_title=0x7f0c0036;
     }
     public static final class layout {
         public static final int activity_city_search=0x7f030000;
@@ -174,8 +181,9 @@ public final class R {
         public static final int item_order_passenger_info=0x7f03000a;
         public static final int item_select=0x7f03000b;
         public static final int layout_btn_back=0x7f03000c;
-        public static final int layout_insure_desc=0x7f03000d;
-        public static final int layout_title=0x7f03000e;
+        public static final int layout_endorse=0x7f03000d;
+        public static final int layout_insure_desc=0x7f03000e;
+        public static final int layout_title=0x7f03000f;
     }
     public static final class menu {
         public static final int city_list=0x7f0b0000;
@@ -192,6 +200,9 @@ public final class R {
         public static final int button_back=0x7f080002;
         public static final int button_search=0x7f080003;
         public static final int cancel=0x7f080005;
+        public static final int endorse_change_desc=0x7f080022;
+        public static final int endorse_desc=0x7f080024;
+        public static final int endorse_refund_desc=0x7f080020;
         /**  城市列表 
          */
         public static final int hint_citylist_search=0x7f08001e;
@@ -211,13 +222,18 @@ public final class R {
         public static final int string_hot_city=0x7f080008;
         public static final int string_search_hit=0x7f080007;
         public static final int sure=0x7f080004;
-        public static final int title_activity_city_list=0x7f08001f;
+        public static final int title_activity_city_list=0x7f080025;
         /**  标题 
          */
         public static final int title_airTicket=0x7f080009;
         public static final int title_date_back=0x7f080012;
         public static final int title_date_leave=0x7f080011;
+        public static final int title_endorse=0x7f080023;
         public static final int title_endorseOrBackDesc=0x7f08000c;
+        public static final int title_endorse_change=0x7f080021;
+        /**  退改签说明 
+         */
+        public static final int title_endorse_refund=0x7f08001f;
         public static final int title_goAndBack=0x7f08000d;
         public static final int title_oneWay=0x7f08000b;
         public static final int title_order_edit=0x7f080013;
