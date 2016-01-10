@@ -18,7 +18,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daemon.activities.SelectActivity;
 import com.daemon.airticket.R;
@@ -29,20 +31,18 @@ public class OrderPassengerAdapter extends BaseAdapter{
 	private int item_sums=0;
 	private SparseIntArray certType_positions;
 	private String[] cert_types;
-	private ArrayList<ViewHolder> holders;
+	//private ArrayList<ViewHolder> holders;
 	
 	public ArrayList<String> data_passenger;  
 	public ArrayList<String> data_certNum; 
-	private TextView testTextView;
-	private ViewHolder testHolder;
-	public OrderPassengerAdapter(Activity mContext, int count,SparseIntArray type_positions) {
+	private TextView tv_order_cert_copy;
+	
+	public OrderPassengerAdapter(final Activity activity, int count,SparseIntArray type_positions) {
 		super();
-		this.activity = mContext;
+		this.activity = activity;
 		this.item_sums = count;
 		this.certType_positions = type_positions;
 		cert_types = activity.getResources().getStringArray(R.array.TypeCert);
-		holders = new ArrayList<OrderPassengerAdapter.ViewHolder>();
-		
 	}
 
 	@Override
@@ -73,8 +73,7 @@ public class OrderPassengerAdapter extends BaseAdapter{
 
 	public void setCertType(int view_position,int type_position){
 		//holders.get(view_position).tv_order_cert.setText(cert_types[type_position]);
-		testTextView.setText(cert_types[type_position]);
-		//Log.e("holders", "holders.size = "+holders.size());
+		tv_order_cert_copy.setText(cert_types[type_position]);
 	}
 	
 	@Override
@@ -91,72 +90,24 @@ public class OrderPassengerAdapter extends BaseAdapter{
 			holder.et_order_certNum = (EditText)convertView.findViewById(R.id.et_order_certNum);
 			
 			holder.btn_order_moreCert = (Button)convertView.findViewById(R.id.btn_order_moreCert);
-//			holder.btn_order_moreCert.setOnClickListener(new OnClickListener() {
-//				
-//				@Override
-//				public void onClick(View v) {
-//					// TODO Auto-generated method stub
-//					
-//					Intent intent = new Intent(activity, SelectActivity.class);
-//					intent.putExtra(TYPE_KEY, TYPE_CERT_KEY);
-//					/**
-//					 * 传递点击哪位乘机人“更多证件”的位置对于的证件类型位置。
-//					 */
-//					intent.putExtra(TYPE_POSITION_KEY, certType_positions.get((Integer)v.getTag()));
-//					/**
-//					 * 传递点击哪位乘机人“更多证件”的位置。
-//					 */
-//					intent.putExtra(TYPE_VIEW_POSITION_KEY, (Integer)v.getTag());
-//					//index = (Integer) v.getTag();
-//					
-//					activity.startActivityForResult(intent,REQUEST_CODE_CERTIFICATE);
-//					activity.overridePendingTransition(0, 0);
-//				}
-//			});
-			holder.et_order_passengers.setOnFocusChangeListener(new OnFocusChangeListener() {  
-	             @Override  
-	             public void onFocusChange(View v, boolean hasFocus) {  
-	                 // TODO Auto-generated method stub  
-//	                 if(data_passenger.size()>0){  
-//	                	 data_passenger.set(position, ((EditText)v).getText().toString());  
-//	                 }  
-	             }  
-	         });
-			holder.et_order_certNum.setOnFocusChangeListener(new OnFocusChangeListener() {  
-	             @Override  
-	             public void onFocusChange(View v, boolean hasFocus) {  
-	                 // TODO Auto-generated method stub  
-//	                 if(data_certNum.size()>0){  
-//	                	 data_certNum.set(position, ((EditText)v).getText().toString());  
-//	                 }  
-	             }  
-	         });
+           
 			convertView.setTag(holder);
-			Log.e("if", "position = "+position);
+			//Log.e("if", "position = "+position);
 
 		}else{
 			holder = (ViewHolder)convertView.getTag();
-			Log.e("else", "position = "+position);
-//			holder.tv_order_cert.setText(holder.tv_order_cert.getText().toString());
-//			holder.et_order_passengers.setText(holder.et_order_passengers.getText().toString());
-//			holder.et_order_certNum.setText(holder.et_order_certNum.getText().toString());
+			//Log.e("else", "position = "+position);
 		}
-		if(!holders.contains(holder)){
-			holders.add(holder);
-			/**
-			 * 记录点击哪位乘机人“更多证件”的位置
-			 */
-			holder.btn_order_moreCert.setTag(position);
-		}else{
-			holders.set(position, holder);
-		}
-		final ViewHolder test = holder;
-		holder.btn_order_moreCert.setOnClickListener(new OnClickListener() {
+        final ViewHolder holder_copy = holder;
+        holder.btn_order_moreCert.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				testTextView = test.tv_order_cert;
+				/**
+				 * 记录点击哪位乘机人“更多证件”的位置
+				 */
+				tv_order_cert_copy = holder_copy.tv_order_cert;
 				Intent intent = new Intent(activity, SelectActivity.class);
 				intent.putExtra(TYPE_KEY, TYPE_CERT_KEY);
 				/**
@@ -167,23 +118,10 @@ public class OrderPassengerAdapter extends BaseAdapter{
 				 * 传递点击哪位乘机人“更多证件”的位置。
 				 */
 				intent.putExtra(TYPE_VIEW_POSITION_KEY, position);
-				//index = (Integer) v.getTag();
-				
 				activity.startActivityForResult(intent,REQUEST_CODE_CERTIFICATE);
 				activity.overridePendingTransition(0, 0);
 			}
 		});
-
-		  
-//         del.setOnClickListener(new OnClickListener() {  
-//             @Override  
-//             public void onClick(View arg0) {  
-//                 // TODO Auto-generated method stub  
-//                 //从集合中删除所删除项的EditText的内容  
-//            	 editText_data.remove(position);  
-//                 adapter.notifyDataSetChanged();  
-//             }  
-//         });  
 		return convertView;
 	}
 	

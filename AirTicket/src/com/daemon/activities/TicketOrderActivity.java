@@ -54,6 +54,8 @@ public class TicketOrderActivity extends BaseActivity{
 	private EditText et_order_phoneNum,et_order_email;
 	
 	private LinearLayout linearLayout_order_destribute;
+	
+	private ListView lv_order_passengerInfo,lv_order_insure;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -65,7 +67,7 @@ public class TicketOrderActivity extends BaseActivity{
 		/**
 		 * 乘机人列表
 		 */
-		ListView lv_order_passengerInfo = (ListView)findViewById(R.id.lv_order_passengerInfo);
+		lv_order_passengerInfo = (ListView)findViewById(R.id.lv_order_passengerInfo);
 		if(passengerAdapter == null)
 			passengerAdapter = new OrderPassengerAdapter(this, item_sums, certType_positions);
 		lv_order_passengerInfo.setAdapter(passengerAdapter);
@@ -73,7 +75,9 @@ public class TicketOrderActivity extends BaseActivity{
 		/**
 		 * --------------------------------空险列表start---------------------------------
 		 */
-		ListView lv_order_insure = (ListView)findViewById(R.id.lv_order_insure);
+		lv_order_insure = (ListView)findViewById(R.id.lv_order_insure);
+		
+		
 		String[] insures = getResources().getStringArray(R.array.TypeInsure);
 		List<Map<String, String>> data = new ArrayList<Map<String,String>>();
 		for (String insure : insures) {
@@ -84,6 +88,7 @@ public class TicketOrderActivity extends BaseActivity{
 		}
 		final OrderInsureAdapter insureAdapter = new OrderInsureAdapter(this, data);
 		lv_order_insure.setAdapter(insureAdapter);
+		
 		lv_order_insure.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -131,6 +136,11 @@ public class TicketOrderActivity extends BaseActivity{
 			certType_positions.append(item_sums-1, 0);
 			passengerAdapter.setType_positions(certType_positions);
 			passengerAdapter.setItemCount(item_sums);
+			/**
+			 * 在乘机人adapter刷新前，让空险列表（或其他列表）获取焦点，这样就导致乘机人的editText失去焦点，从而数据不改变。
+			 */
+			lv_order_insure.requestFocus();
+
 			passengerAdapter.notifyDataSetChanged();
 			break;
 			
