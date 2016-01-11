@@ -1,13 +1,15 @@
 package com.daemon.adapters;
 
-import static com.daemon.consts.Constants.*;
+import static com.daemon.consts.Constants.REQUEST_CODE_CERTIFICATE;
+import static com.daemon.consts.Constants.TYPE_CERT_KEY;
+import static com.daemon.consts.Constants.TYPE_KEY;
+import static com.daemon.consts.Constants.TYPE_POSITION_KEY;
+import static com.daemon.consts.Constants.TYPE_VIEW_POSITION_KEY;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
@@ -20,7 +22,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.daemon.activities.SelectActivity;
 import com.daemon.airticket.R;
@@ -28,32 +29,29 @@ import com.daemon.airticket.R;
 public class OrderPassengerAdapter extends BaseAdapter{
 
 	private Activity activity;
-	private int item_sums=0;
 	private SparseIntArray certType_positions;
 	private String[] cert_types;
-	//private ArrayList<ViewHolder> holders;
-	
-	public ArrayList<String> data_passenger;  
-	public ArrayList<String> data_certNum; 
 	private TextView tv_order_cert_copy;
+	private ArrayList<Integer> list_data;
+	private ListView listView;
 	
-	public OrderPassengerAdapter(final Activity activity, int count,SparseIntArray type_positions) {
+	public OrderPassengerAdapter(final Activity activity, ArrayList<Integer> list_data,SparseIntArray type_positions) {
 		super();
 		this.activity = activity;
-		this.item_sums = count;
+		this.list_data = list_data;
 		this.certType_positions = type_positions;
 		cert_types = activity.getResources().getStringArray(R.array.TypeCert);
 	}
 
 	@Override
 	public int getCount() {
-		return item_sums;
+		return list_data.size();
 	}
 
 	@Override
-	public Object getItem(int position) {
+	public Integer getItem(int position) {
 		// TODO Auto-generated method stub
-		return null;
+		return list_data.get(position);
 	}
 
 	@Override
@@ -62,11 +60,15 @@ public class OrderPassengerAdapter extends BaseAdapter{
 		return 0;
 	}
 
-	public void setItemCount(int count){
-		this.item_sums = count;
+	public void setItemCount(ArrayList<Integer> list_data){
+		this.list_data = list_data;
 	}
 	
 	
+	public void setListView(ListView listView) {
+		this.listView = listView;
+	}
+
 	public void setType_positions(SparseIntArray type_positions) {
 		this.certType_positions = type_positions;
 	}
@@ -88,10 +90,10 @@ public class OrderPassengerAdapter extends BaseAdapter{
 			
 			holder.et_order_passengers = (EditText)convertView.findViewById(R.id.et_order_passengers);
 			holder.et_order_certNum = (EditText)convertView.findViewById(R.id.et_order_certNum);
-			
+
 			holder.btn_order_moreCert = (Button)convertView.findViewById(R.id.btn_order_moreCert);
             holder.btn_order_deleteItem = (Button)convertView.findViewById(R.id.btn_order_deleteItem);
-            
+			
 			convertView.setTag(holder);
 			//Log.e("if", "position = "+position);
 
@@ -99,6 +101,9 @@ public class OrderPassengerAdapter extends BaseAdapter{
 			holder = (ViewHolder)convertView.getTag();
 			//Log.e("else", "position = "+position);
 		}
+		/**
+		 * 下面两个button的位置一定要放到上面的if else外面
+		 */
         final ViewHolder holder_copy = holder;
         holder.btn_order_moreCert.setOnClickListener(new OnClickListener() {
 			
@@ -123,14 +128,66 @@ public class OrderPassengerAdapter extends BaseAdapter{
 				activity.overridePendingTransition(0, 0);
 			}
 		});
+        /**
+         * 删除
+         */
+        holder.btn_order_deleteItem.setText(String.valueOf(position+1));
+        holder.btn_order_deleteItem.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				list_data.remove(position);
+				certType_positions.delete(position);
+				if(tv_order_cert_copy!=null)tv_order_cert_copy.setText(cert_types[0]);
+				Log.e("remove", "position = "+position);
+				//listView.setAdapter(OrderPassengerAdapter.this);
+				notifyDataSetChanged();
+			}
+		});
+        
+		holder.et_order_passengers.setOnFocusChangeListener(new OnFocusChangeListener() {
+			
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				// TODO Auto-generated method stub
+				if(hasFocus){
+					holder_copy.btn_order_deleteItem.setTextColor(activity.getResources().getColor(R.color.title_color));
+				}else{
+					holder_copy.btn_order_deleteItem.setTextColor(activity.getResources().getColor(R.color.font_gray));
+				}
+			}
+		});
+        holder.et_order_certNum.setOnFocusChangeListener(new OnFocusChangeListener() {
+			
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				// TODO Auto-generated method stub
+				if(hasFocus){
+					holder_copy.btn_order_deleteItem.setTextColor(activity.getResources().getColor(R.color.title_color));
+				}else{
+					holder_copy.btn_order_deleteItem.setTextColor(activity.getResources().getColor(R.color.font_gray));
+				}
+			}
+		});
 		return convertView;
 	}
 	
 
 	static class ViewHolder{
 		TextView tv_order_cert;
-		Button btn_order_moreCert,btn_order_deleteItem;
+		Button btn_order_moreCert;
+		Button btn_order_deleteItem;
 		EditText et_order_passengers,et_order_certNum;
+		
+		public void init() {
+			this.tv_order_cert = null;
+			this.btn_order_moreCert = null;
+			this.btn_order_deleteItem = null;
+			this.et_order_passengers = null;
+			this.et_order_certNum = null;
+		}
+		
 	}
 
 }

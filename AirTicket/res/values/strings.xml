@@ -26,6 +26,7 @@
     <string name="title_date_leave">选择出发日期</string>
     <string name="title_date_back">选择返回日期</string>
     <string name="title_order_edit">订单填写</string>
+    <string name="title_ticket_result">%1$ - %2$s (%3$s) </string>
     
     <!-- 舱位类型 -->
     <string-array name="TypeSapce">

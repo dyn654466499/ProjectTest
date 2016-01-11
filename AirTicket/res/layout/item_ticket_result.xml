@@ -1,0 +1,160 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:paddingLeft="15dp" 
+    android:paddingTop="10dp" 
+    android:paddingRight="15dp" 
+    android:paddingBottom="10dp" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout_ticket_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <!-- 起飞时间 -->
+
+            <TextView
+                android:id="@+id/tv_ticket_result_takeOffTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:text="8:00"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/tv_ticket_result_dancheng"
+                android:layout_width="62dp"
+                android:layout_height="6dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="@null"
+                android:focusable="false"
+                android:src="@drawable/dancheng" />
+        </LinearLayout>
+        <!-- 降落时间 -->
+
+        <TextView
+            android:id="@+id/tv_ticket_result_landingTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/linearLayout_ticket_result"
+            android:gravity="center_vertical"
+            android:text="11:20"
+            android:textSize="16sp" />
+        <!-- 价格 -->
+
+        <TextView
+            android:id="@+id/tv_ticket_result_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="60dp"
+            android:gravity="center"
+            android:text="￥1310"
+            android:textColor="@color/title_color"
+            android:textSize="16sp" />
+        <!-- 起飞机场 -->
+
+        <TextView
+            android:id="@+id/tv_ticket_result_takeOffPort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/linearLayout_ticket_result"
+            android:layout_below="@id/linearLayout_ticket_result"
+            android:layout_marginTop="10dp"
+            android:text="宁波烁社机场"
+            android:textColor="#999999"
+            android:textSize="12sp" />
+        <!-- 降落机场 -->
+
+        <TextView
+            android:id="@+id/tv_ticket_result_landingPort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_ticket_result_landingTime"
+            android:layout_below="@id/tv_ticket_result_landingTime"
+            android:layout_marginTop="10dp"
+            android:text="北京首都机场T1"
+            android:textColor="#999999"
+            android:textSize="12sp" />
+        <!-- 折扣 -->
+
+        <TextView
+            android:id="@+id/tv_ticket_result_discount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_ticket_result_price"
+            android:layout_below="@id/tv_ticket_result_price"
+            android:layout_marginTop="10dp"
+            android:text="3折"
+            android:textColor="#999999"
+            android:textSize="12sp" />
+        <!-- 结果展开 -->
+
+        <Button
+            android:id="@+id/btn_ticket_result_unfold"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tv_ticket_result_discount"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/tv_ticket_result_discount"
+            android:background="@null"
+            android:drawableRight="@drawable/ic_xiangxia"
+            android:textSize="12sp" />
+ 
+      
+      <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:layout_alignLeft="@id/tv_ticket_result_takeOffPort"
+            android:layout_below="@id/tv_ticket_result_takeOffPort"
+            android:layout_marginTop="5dp"
+            >
+        <!-- 航空公司图标 -->
+
+        <ImageView
+            android:id="@+id/imageView_ticket_result_airLine"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/submit_edit_clear_normal" />
+
+        <!-- 航空公司名 -->
+
+        <TextView
+            android:id="@+id/tv_ticket_result_airLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/imageView_ticket_result_airLine"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:text="东方航空 MU5214"
+            android:textColor="#999999"
+            android:textSize="12sp" />
+</RelativeLayout>
+        <!-- 票数 -->
+
+        <TextView
+            android:id="@+id/tv_ticket_result_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_ticket_result_discount"
+            android:layout_below="@id/tv_ticket_result_discount"
+            android:layout_marginTop="5dp"
+            android:text="1张"
+            android:textColor="#ff0000"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+</LinearLayout>

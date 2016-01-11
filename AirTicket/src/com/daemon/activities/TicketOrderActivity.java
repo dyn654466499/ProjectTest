@@ -15,8 +15,10 @@ import com.daemon.utils.DialogUtil;
 import com.daemon.utils.ScreenUtil;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Message;
+import android.util.Log;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.view.KeyEvent;
@@ -46,7 +48,8 @@ public class TicketOrderActivity extends BaseActivity{
     /**
      * 初始乘机人的人数
      */
-	private int item_sums = 1;
+	private ArrayList<Integer> passenger_list_data;
+	private int passenger_item_count = 0;
 	
 	private int position_destribute = 0;
 	private OrderPassengerAdapter passengerAdapter;
@@ -61,16 +64,22 @@ public class TicketOrderActivity extends BaseActivity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ticket_order);
+		passenger_list_data = new ArrayList<Integer>();
+		passenger_list_data.add(0);
 		
 		certType_positions = new SparseIntArray();
-		certType_positions.append(item_sums-1, 0);
+		certType_positions.append(passenger_list_data.size()-1, 0);
 		/**
 		 * 乘机人列表
 		 */
 		lv_order_passengerInfo = (ListView)findViewById(R.id.lv_order_passengerInfo);
 		if(passengerAdapter == null)
-			passengerAdapter = new OrderPassengerAdapter(this, item_sums, certType_positions);
+			passengerAdapter = new OrderPassengerAdapter(this, passenger_list_data, certType_positions);
 		lv_order_passengerInfo.setAdapter(passengerAdapter);
+		passengerAdapter.setListView(lv_order_passengerInfo);
+		
+
+		
 		
 		/**
 		 * --------------------------------空险列表start---------------------------------
@@ -119,6 +128,9 @@ public class TicketOrderActivity extends BaseActivity{
 		btn_order_endorse = (Button) findViewById(R.id.btn_order_endorse);
 		btn_order_endorse.setOnClickListener(this);
 		
+		Button btn_order_commit = (Button) findViewById(R.id.btn_order_commit);
+		btn_order_commit.setOnClickListener(this);
+		
 		TextView tv_title = (TextView)findViewById(R.id.tv_title);
 		tv_title.setText(getString(R.string.title_order_edit));
 		
@@ -131,11 +143,14 @@ public class TicketOrderActivity extends BaseActivity{
 		// TODO Auto-generated method stub
 		Intent intent = null;
 		switch (v.getId()) {
+		/**
+		 * 增加乘客人
+		 */
 		case R.id.btn_order_morePassenger:
-			item_sums++;
-			certType_positions.append(item_sums-1, 0);
+			passenger_list_data.add(0);
+			certType_positions.append(passenger_list_data.size()-1, 0);
 			passengerAdapter.setType_positions(certType_positions);
-			passengerAdapter.setItemCount(item_sums);
+			passengerAdapter.setItemCount(passenger_list_data);
 			/**
 			 * 在乘机人adapter刷新前，让空险列表（或其他列表）获取焦点，这样就导致乘机人的editText失去焦点，从而数据不改变。
 			 */
@@ -144,19 +159,6 @@ public class TicketOrderActivity extends BaseActivity{
 			passengerAdapter.notifyDataSetChanged();
 			break;
 	
-//		case R.id.btn_order_deleteItem:
-//			item_sums--;
-//			//certType_positions.append(item_sums-1, 0);
-//			passengerAdapter.setType_positions(certType_positions);
-//			passengerAdapter.setItemCount(item_sums);
-//			/**
-//			 * 在乘机人adapter刷新前，让空险列表（或其他列表）获取焦点，这样就导致乘机人的editText失去焦点，从而数据不改变。
-//			 */
-//			lv_order_insure.requestFocus();
-//
-//			passengerAdapter.notifyDataSetChanged();
-//			break;
-			
 		case R.id.btn_back:
 			DialogUtil.showDialog(TicketOrderActivity.this, getString(R.string.title_order_edit), "您正在填写订单，是否要退出？", new Commands() {
 				
@@ -167,7 +169,9 @@ public class TicketOrderActivity extends BaseActivity{
 				}
 			});
 			break;
-			
+		/**	
+		 * 选择配送方式
+		 */
 		case R.id.btn_order_destribute:
 			intent = new Intent(TicketOrderActivity.this, SelectActivity.class);
 			intent.putExtra(TYPE_KEY, TYPE_TICKET_DISTRIBUTE_KEY);
@@ -175,17 +179,38 @@ public class TicketOrderActivity extends BaseActivity{
 			startActivityForResult(intent,REQUEST_CODE_DISTRIBUTE);
 			overridePendingTransition(0, 0);
 			break;
-			
+		/**
+		 * 退改签说明	
+		 */
 		case R.id.btn_order_endorse:
 			startActivity(new Intent(TicketOrderActivity.this,EndorseActivity.class));
 			break;
-		
+		/**
+		 * 如有配送方式，选择城市
+		 */
 		case R.id.btn_order_city:
 			intent = new Intent();
 			intent.setClass(TicketOrderActivity.this, CitySearchActivity.class);
 			startActivityForResult(intent, REQUEST_CODE_CITY);
 			break;
-			
+		/**
+		 * 提交订单	
+		 */
+		case R.id.btn_order_commit:
+			/**
+			 * 获取每个editText
+			 */
+			for (int i = 0; i < lv_order_passengerInfo.getChildCount(); i++) {
+			     LinearLayout layout = (LinearLayout)lv_order_passengerInfo.getChildAt(i);// 获得子item的layout
+			     EditText et_order_passengers = (EditText) layout.findViewById(R.id.et_order_passengers);// 从layout中获得控件,根据其id
+			     EditText et_order_certNum = (EditText) layout.findViewById(R.id.et_order_certNum);//或者根据位置,在这我假设TextView在前，EditText在后
+			     TextView tv_order_certType = (TextView) layout.findViewById(R.id.tv_order_cert);
+			     Log.e(getTAG(), "name="+et_order_passengers.getText().toString()+
+			    		 ",cert_num ="+et_order_certNum.getText().toString()+
+			    		 ",certType="+tv_order_certType.getText());
+			}
+			break;
+		
 		default:
 			break;
 		}
@@ -239,6 +264,9 @@ public class TicketOrderActivity extends BaseActivity{
 						@Override
 						public void run() {
 							// TODO Auto-generated method stub
+							/**
+							 * 使scrollView向底部滑动
+							 */
 							ScrollView sv_order = (ScrollView)findViewById(R.id.sv_order);
 							sv_order.fullScroll(ScrollView.FOCUS_DOWN);
 						}
@@ -251,6 +279,7 @@ public class TicketOrderActivity extends BaseActivity{
 				break;
 			
 			case REQUEST_CODE_CITY:
+				btn_order_city.setTextColor(Color.BLACK);
 				btn_order_city.setText(data.getStringExtra(KEY_CITY));
 				break;
 				

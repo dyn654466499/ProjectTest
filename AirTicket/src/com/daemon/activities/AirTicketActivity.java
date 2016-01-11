@@ -188,7 +188,7 @@ public class AirTicketActivity extends BaseActivity {
 		case R.id.btn_airticket_search:
 			String city_leave = btn_airticket_leave.getText().toString();
 			String city_arrive = btn_airticket_arrive.getText().toString();
-            intent = new Intent(AirTicketActivity.this,TicketOrderActivity.class);
+            intent = new Intent(AirTicketActivity.this,TicketResultActivity.class);
             startActivity(intent);
 			break;
 
