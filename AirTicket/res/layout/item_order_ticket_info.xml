@@ -1,0 +1,166 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="15dp" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff" >
+
+        <TextView
+            android:id="@+id/tv_order_ticket_airline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="南方航空公司"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout_order_ticket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_order_ticket_airline"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="#ffffff" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" >
+
+                <LinearLayout
+                    android:id="@+id/linearLayout_ticket_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <!-- 起飞时间 -->
+
+                    <TextView
+                        android:id="@+id/tv_order_ticket_takeOffTime"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="8:00"
+                        android:textSize="24sp" />
+
+                    <ImageView
+                        android:id="@+id/tv_order_ticket_dancheng"
+                        android:layout_width="0dp"
+                        android:layout_height="6dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:background="@null"
+                        android:focusable="false"
+                        android:src="@drawable/dancheng_da" />
+
+                    <!-- 降落时间 -->
+
+                    <TextView
+                        android:id="@+id/tv_order_ticket_landingTime"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="11:20"
+                        android:textSize="24sp" />
+                </LinearLayout>
+
+                <!-- 价格 -->
+                <!-- 起飞机场 -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/linearLayout_ticket_result"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/tv_order_ticket_takeOffPort"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="宁波烁社机场"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                    <!-- 降落机场 -->
+                    <LinearLayout 
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        />
+                    <TextView
+                        android:id="@+id/tv_order_ticket_landingPort"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="北京首都机场T1"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+        <!-- 折扣 -->
+
+        <LinearLayout
+            android:id="@+id/linearLayout_order_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/relativeLayout_order_ticket"
+            android:layout_below="@id/relativeLayout_order_ticket"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+             >
+
+            <!-- 航空公司名 -->
+
+            <TextView
+                android:id="@+id/tv_order_ticket_spaceType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="东方航空 MU5214"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_order_endorse"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/linearLayout_order_price"
+            android:layout_below="@id/relativeLayout_order_ticket"
+            android:background="@null"
+            android:minHeight="15dp"
+            android:text="@string/title_endorseOrBackDesc"
+            android:textColor="@color/title_color"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_order_ticket_takeOffDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_order_ticket_airline"
+            android:layout_alignBottom="@+id/tv_order_ticket_airline"
+            android:layout_centerHorizontal="true"
+            android:text="2月7日"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+</LinearLayout>

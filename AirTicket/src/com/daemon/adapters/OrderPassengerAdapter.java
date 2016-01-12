@@ -169,12 +169,19 @@ public class OrderPassengerAdapter extends BaseAdapter{
          * 删除
          */
         holder.btn_order_deleteItem.setText(String.valueOf(position+1));
+        holder.btn_order_deleteItem.setEnabled(true);
         holder.btn_order_deleteItem.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				infos.remove(holder.position);
+				if(infos.size()<=1){
+					v.setEnabled(false);
+					
+				}else{
+					infos.remove(holder.position);
+					v.setEnabled(true);
+				}
 				Log.e("remove", "position = "+position);
 				notifyDataSetChanged();
 			}

@@ -26,13 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
-                <Button
-                    android:id="@+id/btn_order_endorse"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" 
-                    android:textColor="@color/title_color"
-                    android:text="@string/title_endorseOrBackDesc"
-                    />
+                <include layout="@layout/item_order_ticket_info"/>
             </LinearLayout>
 
             <!-- 乘机人列表 -->

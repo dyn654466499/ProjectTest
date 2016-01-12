@@ -138,6 +138,9 @@ public class TicketOrderActivity extends BaseActivity{
 		
 		Button btn_back = (Button)findViewById(R.id.btn_back);
 		btn_back.setOnClickListener(this);
+		
+		ScrollView scrollView = (ScrollView)findViewById(R.id.sv_order);
+		scrollView.scrollTo(10, 10);
 	}
 
 	@Override
