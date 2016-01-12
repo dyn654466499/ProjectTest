@@ -153,7 +153,7 @@ public class TicketOrderActivity extends BaseActivity{
 			/**
 			 * 在乘机人adapter刷新前，让空险列表（或其他列表）获取焦点，这样就导致乘机人的editText失去焦点，从而数据不改变。
 			 */
-			lv_order_insure.requestFocus();
+			//lv_order_insure.requestFocus();
 
 			passengerAdapter.notifyDataSetChanged();
 			break;

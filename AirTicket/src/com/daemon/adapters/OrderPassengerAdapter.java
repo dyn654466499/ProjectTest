@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.SparseIntArray;
@@ -60,7 +61,7 @@ public class OrderPassengerAdapter extends BaseAdapter{
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
-		ViewHolder holder = null;
+		final ViewHolder holder;
 		
 		if(convertView == null){
 			holder = new ViewHolder();
@@ -72,7 +73,9 @@ public class OrderPassengerAdapter extends BaseAdapter{
 
 			holder.btn_order_moreCert = (Button)convertView.findViewById(R.id.btn_order_moreCert);
             holder.btn_order_deleteItem = (Button)convertView.findViewById(R.id.btn_order_deleteItem);
-			
+    		
+            
+    		
 			convertView.setTag(holder);
 			//Log.e("if", "position = "+position);
 
@@ -80,17 +83,40 @@ public class OrderPassengerAdapter extends BaseAdapter{
 			holder = (ViewHolder)convertView.getTag();
 			//Log.e("else", "position = "+position);
 		}
-		final ViewHolder holder_copy = holder;
-		
+		holder.position = position;
+		holder.et_order_passengers.addTextChangedListener(new TextWatcher(){
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if(!TextUtils.isEmpty(s)){
+				int position = holder.position;
+				infos.get(position).name = s.toString();
+				}
+			}
+		});
         holder.et_order_certNum.addTextChangedListener(new TextWatcher() {
 			
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
-				if(holder_copy.et_order_certNum.getTag()!=null){
-				int position = (Integer)holder_copy.et_order_certNum.getTag();
+				if(!TextUtils.isEmpty(s)){
+				int position = holder.position;
 				infos.get(position).certNum = s.toString();
-			    }
+				}
 			}
 
 			@Override
@@ -109,12 +135,8 @@ public class OrderPassengerAdapter extends BaseAdapter{
 		});
 
 		holder.et_order_passengers.setText(infos.get(position).name);
-		holder.et_order_passengers.setTag(position);
 		
 		holder.et_order_certNum.setText(infos.get(position).certNum);
-		holder.et_order_certNum.setTag(position);
-		
-		holder.et_order_passengers.addTextChangedListener(new Test(holder));
 		
 		holder.tv_order_certType.setText(infos.get(position).certType);
 		
@@ -152,7 +174,7 @@ public class OrderPassengerAdapter extends BaseAdapter{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				infos.remove(position);
+				infos.remove(holder.position);
 				Log.e("remove", "position = "+position);
 				notifyDataSetChanged();
 			}
@@ -164,9 +186,9 @@ public class OrderPassengerAdapter extends BaseAdapter{
 			public void onFocusChange(View v, boolean hasFocus) {
 				// TODO Auto-generated method stub
 				if(hasFocus){
-					holder_copy.btn_order_deleteItem.setTextColor(activity.getResources().getColor(R.color.title_color));
+					holder.btn_order_deleteItem.setTextColor(activity.getResources().getColor(R.color.title_color));
 				}else{
-					holder_copy.btn_order_deleteItem.setTextColor(activity.getResources().getColor(R.color.font_gray));
+					holder.btn_order_deleteItem.setTextColor(activity.getResources().getColor(R.color.font_gray));
 				}
 			}
 		});
@@ -176,9 +198,9 @@ public class OrderPassengerAdapter extends BaseAdapter{
 			public void onFocusChange(View v, boolean hasFocus) {
 				// TODO Auto-generated method stub
 				if(hasFocus){
-					holder_copy.btn_order_deleteItem.setTextColor(activity.getResources().getColor(R.color.title_color));
+					holder.btn_order_deleteItem.setTextColor(activity.getResources().getColor(R.color.title_color));
 				}else{
-					holder_copy.btn_order_deleteItem.setTextColor(activity.getResources().getColor(R.color.font_gray));
+					holder.btn_order_deleteItem.setTextColor(activity.getResources().getColor(R.color.font_gray));
 				}
 			}
 		});
@@ -191,38 +213,9 @@ public class OrderPassengerAdapter extends BaseAdapter{
 		Button btn_order_moreCert;
 		Button btn_order_deleteItem;
 		EditText et_order_passengers,et_order_certNum;
-		
+		int position;
 	}
 	
-	class Test implements TextWatcher{
-		private ViewHolder holder;
-		
-		public Test(ViewHolder holder) {
-			super();
-			this.holder = holder;
-		}
-
-		@Override
-		public void onTextChanged(CharSequence s, int start, int before, int count) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void beforeTextChanged(CharSequence s, int start, int count,
-				int after) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void afterTextChanged(Editable s) {
-			// TODO Auto-generated method stub
-			if(holder.et_order_passengers.getTag()!=null){
-			int position = (Integer)holder.et_order_passengers.getTag();
-			infos.get(position).name = s.toString();
-			}
-		}
-	}
+	
 
 }
