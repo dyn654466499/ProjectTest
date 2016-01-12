@@ -10,6 +10,7 @@ import com.daemon.beans.TicketInfo;
 
 import android.os.Bundle;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
@@ -34,15 +35,26 @@ public class TicketResultActivity extends BaseActivity{
 		btn_back.setOnClickListener(this);
 		
 		ticketInfos = new ArrayList<TicketInfo>();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 6; i++) {
 			TicketInfo info = new TicketInfo();
-			
+			info.airLine = "南方航空";
+			info.amount = "3";
+			info.ariLineIcon = getResources().getDrawable(R.drawable.submit_edit_clear_normal);
+			info.discount ="5折";
+			info.landingPort = "宝安机场";
+			info.landingTime = "16:30";
+			info.price = "￥"+"1350";
+			info.takeOffPort = "吴圩机场";
+			info.takeOffTime = "12:00";
 			ticketInfos.add(info);
 		}
 		
 		ticketDetailInfos = new ArrayList<TicketDetailInfo>();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 3; i++) {
 			TicketDetailInfo info = new TicketDetailInfo();
+			info.discount = "5折";
+			info.price = "￥"+"1350";
+			info.spaceType = "头等舱";
 			ticketDetailInfos.add(info);
 		}
 		
@@ -50,19 +62,6 @@ public class TicketResultActivity extends BaseActivity{
 		final TicketResultAdapter adapter = new TicketResultAdapter(this,ticketInfos,ticketDetailInfos);
 		adapter.setExpandableListView(elv_ticket_result);
 		elv_ticket_result.setAdapter(adapter);
-		elv_ticket_result.setOnGroupExpandListener(new OnGroupExpandListener() {    
-		    
-	        @Override    
-	        public void onGroupExpand(int groupPosition) {    
-//	            for (int i = 0; i < adapter.getGroupCount(); i++) {    
-//	                if (groupPosition != i) {    
-//	                	elv_ticket_result.collapseGroup(i);
-//	                }    
-//	            }    
-	            //adapter.setExpanded_position(groupPosition);
-	        }    
-	    
-	    }); 
 		/**
 		 * 此处让title获取焦点，这样scrollview就滚到顶部了
 		 */

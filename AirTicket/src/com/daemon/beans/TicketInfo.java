@@ -1,5 +1,7 @@
 package com.daemon.beans;
 
+import android.graphics.drawable.Drawable;
+
 public class TicketInfo {
 	/**
 	 * 起飞时间
@@ -33,4 +35,12 @@ public class TicketInfo {
 	 * 票数
 	 */
    public String amount;
+   /**
+    * 航空公司logo
+    */
+   public Drawable ariLineIcon;
+   /**
+    * 是否展开的标识
+    */
+   public boolean isExpanded;
 }

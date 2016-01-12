@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
@@ -25,57 +27,34 @@ import android.widget.TextView;
 
 import com.daemon.activities.SelectActivity;
 import com.daemon.airticket.R;
+import com.daemon.beans.PassengerInfo;
 
 public class OrderPassengerAdapter extends BaseAdapter{
 
 	private Activity activity;
-	private SparseIntArray certType_positions;
-	private String[] cert_types;
-	private TextView tv_order_cert_copy;
-	private ArrayList<Integer> list_data;
-	private ListView listView;
+	private ArrayList<PassengerInfo> infos;
 	
-	public OrderPassengerAdapter(final Activity activity, ArrayList<Integer> list_data,SparseIntArray type_positions) {
+	public OrderPassengerAdapter(final Activity activity, ArrayList<PassengerInfo> infos,SparseIntArray type_positions) {
 		super();
 		this.activity = activity;
-		this.list_data = list_data;
-		this.certType_positions = type_positions;
-		cert_types = activity.getResources().getStringArray(R.array.TypeCert);
+		this.infos = infos;
 	}
 
 	@Override
 	public int getCount() {
-		return list_data.size();
+		return infos.size();
 	}
 
 	@Override
-	public Integer getItem(int position) {
+	public PassengerInfo getItem(int position) {
 		// TODO Auto-generated method stub
-		return list_data.get(position);
+		return infos.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	public void setItemCount(ArrayList<Integer> list_data){
-		this.list_data = list_data;
-	}
-	
-	
-	public void setListView(ListView listView) {
-		this.listView = listView;
-	}
-
-	public void setType_positions(SparseIntArray type_positions) {
-		this.certType_positions = type_positions;
-	}
-
-	public void setCertType(int view_position,int type_position){
-		//holders.get(view_position).tv_order_cert.setText(cert_types[type_position]);
-		tv_order_cert_copy.setText(cert_types[type_position]);
 	}
 	
 	@Override
@@ -86,7 +65,7 @@ public class OrderPassengerAdapter extends BaseAdapter{
 		if(convertView == null){
 			holder = new ViewHolder();
 			convertView = LayoutInflater.from(activity).inflate(R.layout.item_order_passenger_info, null,false);
-			holder.tv_order_cert = (TextView)convertView.findViewById(R.id.tv_order_cert);
+			holder.tv_order_certType = (TextView)convertView.findViewById(R.id.tv_order_certType);
 			
 			holder.et_order_passengers = (EditText)convertView.findViewById(R.id.et_order_passengers);
 			holder.et_order_certNum = (EditText)convertView.findViewById(R.id.et_order_certNum);
@@ -101,10 +80,47 @@ public class OrderPassengerAdapter extends BaseAdapter{
 			holder = (ViewHolder)convertView.getTag();
 			//Log.e("else", "position = "+position);
 		}
+		final ViewHolder holder_copy = holder;
+		
+        holder.et_order_certNum.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if(holder_copy.et_order_certNum.getTag()!=null){
+				int position = (Integer)holder_copy.et_order_certNum.getTag();
+				infos.get(position).certNum = s.toString();
+			    }
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+
+		holder.et_order_passengers.setText(infos.get(position).name);
+		holder.et_order_passengers.setTag(position);
+		
+		holder.et_order_certNum.setText(infos.get(position).certNum);
+		holder.et_order_certNum.setTag(position);
+		
+		holder.et_order_passengers.addTextChangedListener(new Test(holder));
+		
+		holder.tv_order_certType.setText(infos.get(position).certType);
+		
 		/**
 		 * 下面两个button的位置一定要放到上面的if else外面
 		 */
-        final ViewHolder holder_copy = holder;
         holder.btn_order_moreCert.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -113,13 +129,12 @@ public class OrderPassengerAdapter extends BaseAdapter{
 				/**
 				 * 记录点击哪位乘机人“更多证件”的位置
 				 */
-				tv_order_cert_copy = holder_copy.tv_order_cert;
 				Intent intent = new Intent(activity, SelectActivity.class);
 				intent.putExtra(TYPE_KEY, TYPE_CERT_KEY);
 				/**
 				 * 传递点击哪位乘机人“更多证件”的位置对于的证件类型位置。
 				 */
-				intent.putExtra(TYPE_POSITION_KEY, certType_positions.get(position));
+				intent.putExtra(TYPE_POSITION_KEY, infos.get(position).cert_position);
 				/**
 				 * 传递点击哪位乘机人“更多证件”的位置。
 				 */
@@ -137,11 +152,8 @@ public class OrderPassengerAdapter extends BaseAdapter{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				list_data.remove(position);
-				certType_positions.delete(position);
-				if(tv_order_cert_copy!=null)tv_order_cert_copy.setText(cert_types[0]);
+				infos.remove(position);
 				Log.e("remove", "position = "+position);
-				//listView.setAdapter(OrderPassengerAdapter.this);
 				notifyDataSetChanged();
 			}
 		});
@@ -175,19 +187,42 @@ public class OrderPassengerAdapter extends BaseAdapter{
 	
 
 	static class ViewHolder{
-		TextView tv_order_cert;
+		TextView tv_order_certType;
 		Button btn_order_moreCert;
 		Button btn_order_deleteItem;
 		EditText et_order_passengers,et_order_certNum;
 		
-		public void init() {
-			this.tv_order_cert = null;
-			this.btn_order_moreCert = null;
-			this.btn_order_deleteItem = null;
-			this.et_order_passengers = null;
-			this.et_order_certNum = null;
+	}
+	
+	class Test implements TextWatcher{
+		private ViewHolder holder;
+		
+		public Test(ViewHolder holder) {
+			super();
+			this.holder = holder;
+		}
+
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before, int count) {
+			// TODO Auto-generated method stub
+			
 		}
 		
+		@Override
+		public void beforeTextChanged(CharSequence s, int start, int count,
+				int after) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void afterTextChanged(Editable s) {
+			// TODO Auto-generated method stub
+			if(holder.et_order_passengers.getTag()!=null){
+			int position = (Integer)holder.et_order_passengers.getTag();
+			infos.get(position).name = s.toString();
+			}
+		}
 	}
 
 }

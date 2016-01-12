@@ -22,20 +22,13 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    <ScrollView
-        android:id="@+id/sv_ticket_result"
+    <ExpandableListView
+        android:id="@+id/elv_ticket_result"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <com.daemon.customview.ExpandableListViewForScrollView
-            android:id="@+id/elv_ticket_result"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:background="#ffffff"
-            android:childDivider="@drawable/line"
-            android:groupIndicator="@null" />
-    </ScrollView>
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        android:background="#ffffff"
+        android:childDivider="@drawable/line"
+        android:groupIndicator="@null" />
 
 </LinearLayout>

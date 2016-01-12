@@ -1,5 +1,6 @@
 package com.daemon.adapters;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -16,8 +17,13 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnGroupClickListener;
+import android.widget.ExpandableListView.OnGroupCollapseListener;
+import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.daemon.activities.TicketOrderActivity;
@@ -33,8 +39,14 @@ public class TicketResultAdapter extends BaseExpandableListAdapter {
 	private List<TicketInfo> ticketInfos;
 	private List<TicketDetailInfo> ticketDetailInfos;
 	private Button btn_ticket_result_unfold_copy;
-	private int expanded_position=0;
-
+	private int oldGroupPosition=-1;
+	
+	private List<ViewHolderGroup> groups;
+	
+	private LinearLayout layout_copy;
+	
+	private static int[] groupState = {0,1,0}; 
+	
 	public TicketResultAdapter(Context mContext, List<TicketInfo> ticketInfos,
 			List<TicketDetailInfo> ticketDetailInfos) {
 		super();
@@ -45,14 +57,16 @@ public class TicketResultAdapter extends BaseExpandableListAdapter {
 				R.drawable.ic_xiangxia);
 		bitmap = ImageUtil.rotateBitmap(bitmap, 180);
 		ic_xiangshang = new BitmapDrawable(mContext.getResources(), bitmap);
+		groups = new ArrayList<TicketResultAdapter.ViewHolderGroup>();
+		
 	}
 
-	public void setExpandableListView(ExpandableListView elv) {
-		this.elv = elv;
+	public void setExpandableListView(ExpandableListView params_elv) {
+		this.elv = params_elv;
 	}
 
 	@Override
-	public Object getGroup(int groupPosition) {
+	public TicketInfo getGroup(int groupPosition) {
 		return ticketInfos.get(groupPosition);
 	}
 
@@ -66,8 +80,8 @@ public class TicketResultAdapter extends BaseExpandableListAdapter {
 		return groupPosition;
 	}
 
-	public void setExpanded_position(int expanded_position) {
-		this.expanded_position = expanded_position;
+	public void setExpanded_position(int oldGroupPosition) {
+		this.oldGroupPosition = oldGroupPosition;
 	}
 
 	@Override
@@ -76,10 +90,10 @@ public class TicketResultAdapter extends BaseExpandableListAdapter {
 		ViewHolderGroup group = null;
 		if (convertView == null) {
 			group = new ViewHolderGroup();
-			convertView = LayoutInflater.from(mContext).inflate(
-					R.layout.item_ticket_result, null, false);
+			convertView = LayoutInflater.from(mContext).inflate(R.layout.item_ticket_result, parent, false);
 			group.btn_ticket_result_unfold = (Button) convertView
 					.findViewById(R.id.btn_ticket_result_unfold);
+			
 			group.tv_ticket_result_takeOffTime = (TextView) convertView
 					.findViewById(R.id.tv_ticket_result_takeOffTime);
 			group.tv_ticket_result_landingTime = (TextView) convertView
@@ -98,86 +112,59 @@ public class TicketResultAdapter extends BaseExpandableListAdapter {
 					.findViewById(R.id.tv_ticket_result_amount);
 			group.imageView_ticket_result_airLine = (ImageView) convertView
 					.findViewById(R.id.imageView_ticket_result_airLine);
+			
 			convertView.setTag(group);
 		} else {
 			group = (ViewHolderGroup) convertView.getTag();
 		}
-		final ViewHolderGroup group_copy = group;
-		final View convertView_copy = convertView;
-
-		group.btn_ticket_result_unfold
-				.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						if(elv.isGroupExpanded(groupPosition)){
-							/**
-							 * 收起
-							 */
-							elv.collapseGroup(groupPosition);
-							//((Button)elv.getChildAt(expanded_position).findViewById(R.id.btn_ticket_result_unfold))
-							group_copy.btn_ticket_result_unfold
-							.setCompoundDrawablesWithIntrinsicBounds(
-									null,
-									null,
-									mContext.getResources()
-											.getDrawable(
-													R.drawable.ic_xiangxia),
-									null);
-						}else{
-							/**
-							 * 展开
-							 */
-							if(expanded_position!=groupPosition){
-								elv.collapseGroup(expanded_position);
-								btn_ticket_result_unfold_copy.setCompoundDrawablesWithIntrinsicBounds(
-										null,
-										null,
-										mContext.getResources()
-												.getDrawable(
-														R.drawable.ic_xiangxia),
-										null);
-							}
-							
-							elv.expandGroup(groupPosition);
-							//((Button)elv.getChildAt(groupPosition).findViewById(R.id.btn_ticket_result_unfold))
-							group_copy.btn_ticket_result_unfold
-							.setCompoundDrawablesWithIntrinsicBounds(
-									null, null, ic_xiangshang, null);
-							btn_ticket_result_unfold_copy = group_copy.btn_ticket_result_unfold;
-							expanded_position = groupPosition;
-					/**
-					 * 展开列表时，滚动到该view的位置
-					 */
-					final ScrollView sv = (ScrollView) elv.getParent();
-					sv.post(new Runnable() {
-
-						@Override
-						public void run() {
-							// TODO Auto-generated method stub
-							sv.scrollTo((int) convertView_copy.getX(),
-									(int) convertView_copy.getY());
-						}
-					});
+		
+		
+		if(!ticketInfos.get(groupPosition).isExpanded){
+			group.btn_ticket_result_unfold
+			.setCompoundDrawablesWithIntrinsicBounds(
+					null, 
+					null, 
+					mContext.getResources().getDrawable(R.drawable.ic_xiangxia), 
+					null);
+			
+		}else{
+			group.btn_ticket_result_unfold
+			.setCompoundDrawablesWithIntrinsicBounds(
+					null, 
+					null, 
+					ic_xiangshang, 
+					null);
+			
+		}
+		 group.tv_ticket_result_takeOffTime.setText(ticketInfos.get(groupPosition).takeOffTime);
+		 group.tv_ticket_result_landingTime.setText(ticketInfos.get(groupPosition).landingTime);
+		 group.tv_ticket_result_price.setText(ticketInfos.get(groupPosition).price);
+		 group.tv_ticket_result_takeOffPort.setText(ticketInfos.get(groupPosition).takeOffPort);
+		 group.tv_ticket_result_landingPort.setText(ticketInfos.get(groupPosition).landingPort);
+		 group.tv_ticket_result_discount.setText(ticketInfos.get(groupPosition).discount);
+		 group.tv_ticket_result_airLine.setText(ticketInfos.get(groupPosition).airLine);
+		 group.tv_ticket_result_amount.setText(ticketInfos.get(groupPosition).amount);
+		 group.btn_ticket_result_unfold.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					//Log.e("groupPosition", "groupPosition="+groupPosition);
+					if(ticketInfos.get(groupPosition).isExpanded){
+						elv.collapseGroup(groupPosition);
+						ticketInfos.get(groupPosition).isExpanded = false;
+					}else{
+						elv.expandGroup(groupPosition);
+						ticketInfos.get(groupPosition).isExpanded = true;
 					}
-					}
-				});
-
-		// group.tv_ticket_result_takeOffTime.setText(ticketInfos.get(groupPosition).takeOffTime);
-		// group.tv_ticket_result_landingTime.setText(ticketInfos.get(groupPosition).landingTime);
-		// group.tv_ticket_result_price.setText(ticketInfos.get(groupPosition).price);
-		// group.tv_ticket_result_takeOffPort.setText(ticketInfos.get(groupPosition).takeOffPort);
-		// group.tv_ticket_result_landingPort.setText(ticketInfos.get(groupPosition).landingPort);
-		// group.tv_ticket_result_discount.setText(ticketInfos.get(groupPosition).discount);
-		// group.tv_ticket_result_airLine.setText(ticketInfos.get(groupPosition).airLine);
-		// group.tv_ticket_result_amount.setText(ticketInfos.get(groupPosition).amount);
-
+					notifyDataSetChanged();
+				}
+			});
 		return convertView;
 	}
 
 	@Override
-	public Object getChild(int groupPosition, int childPosition) {
+	public TicketDetailInfo getChild(int groupPosition, int childPosition) {
 		return ticketDetailInfos.get(childPosition);
 	}
 
@@ -198,7 +185,7 @@ public class TicketResultAdapter extends BaseExpandableListAdapter {
 		if (convertView == null) {
 			child = new ViewHolderChild();
 			convertView = LayoutInflater.from(mContext).inflate(
-					R.layout.item_ticket_result_detail, null, false);
+					R.layout.item_ticket_result_detail, parent, false);
 			child.btn_ticket_result_details_book = (Button) convertView
 					.findViewById(R.id.btn_ticket_result_details_book);
 			child.tv_ticket_result_details_space = (TextView) convertView
@@ -212,7 +199,7 @@ public class TicketResultAdapter extends BaseExpandableListAdapter {
 		} else {
 			child = (ViewHolderChild) convertView.getTag();
 		}
-		final ViewHolderChild child_copy = child;
+		
 		child.btn_ticket_result_details_book
 				.setOnClickListener(new OnClickListener() {
 
@@ -221,13 +208,13 @@ public class TicketResultAdapter extends BaseExpandableListAdapter {
 						// TODO Auto-generated method stub
 						mContext.startActivity(new Intent(mContext,
 								TicketOrderActivity.class));
-						Log.e("sdfsdf", "groupPosition="+groupPosition+",childPosition="+childPosition);
+						Log.e("btn_ticket_result_details_book", "groupPosition="+groupPosition+",childPosition="+childPosition);
 					}
 				});
 
-		// child.tv_ticket_result_details_space.setText(ticketDetailInfos.get(childPosition).spaceType);
-		// child.tv_ticket_result_details_discount.setText(ticketDetailInfos.get(childPosition).discount);
-		// child.tv_ticket_result_details_price.setText(ticketDetailInfos.get(childPosition).price);
+		 child.tv_ticket_result_details_space.setText(ticketDetailInfos.get(childPosition).spaceType);
+		 child.tv_ticket_result_details_discount.setText(ticketDetailInfos.get(childPosition).discount);
+		 child.tv_ticket_result_details_price.setText(ticketDetailInfos.get(childPosition).price);
 		return convertView;
 	}
 
@@ -248,6 +235,10 @@ public class TicketResultAdapter extends BaseExpandableListAdapter {
 				tv_ticket_result_landingPort, tv_ticket_result_discount,
 				tv_ticket_result_airLine, tv_ticket_result_amount;
 		ImageView imageView_ticket_result_airLine;
+		int position = -1;
+		public void setPosition(int position){
+			this.position = position;
+		}
 	}
 
 	static class ViewHolderChild {

@@ -61,7 +61,7 @@
         android:padding="5dp" >
 
         <TextView
-            android:id="@+id/tv_order_cert"
+            android:id="@+id/tv_order_certType"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

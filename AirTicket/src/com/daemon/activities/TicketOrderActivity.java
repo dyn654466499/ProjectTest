@@ -10,6 +10,7 @@ import java.util.Map;
 import com.daemon.adapters.OrderInsureAdapter;
 import com.daemon.adapters.OrderPassengerAdapter;
 import com.daemon.airticket.R;
+import com.daemon.beans.PassengerInfo;
 import com.daemon.interfaces.Commands;
 import com.daemon.utils.DialogUtil;
 import com.daemon.utils.ScreenUtil;
@@ -30,6 +31,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 
@@ -48,7 +50,6 @@ public class TicketOrderActivity extends BaseActivity{
     /**
      * 初始乘机人的人数
      */
-	private ArrayList<Integer> passenger_list_data;
 	private int passenger_item_count = 0;
 	
 	private int position_destribute = 0;
@@ -59,27 +60,13 @@ public class TicketOrderActivity extends BaseActivity{
 	private LinearLayout linearLayout_order_destribute;
 	
 	private ListView lv_order_passengerInfo,lv_order_insure;
+	
+	private ArrayList<PassengerInfo> passenger_infos;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ticket_order);
-		passenger_list_data = new ArrayList<Integer>();
-		passenger_list_data.add(0);
-		
-		certType_positions = new SparseIntArray();
-		certType_positions.append(passenger_list_data.size()-1, 0);
-		/**
-		 * 乘机人列表
-		 */
-		lv_order_passengerInfo = (ListView)findViewById(R.id.lv_order_passengerInfo);
-		if(passengerAdapter == null)
-			passengerAdapter = new OrderPassengerAdapter(this, passenger_list_data, certType_positions);
-		lv_order_passengerInfo.setAdapter(passengerAdapter);
-		passengerAdapter.setListView(lv_order_passengerInfo);
-		
-
-		
 		
 		/**
 		 * --------------------------------空险列表start---------------------------------
@@ -112,6 +99,21 @@ public class TicketOrderActivity extends BaseActivity{
 		 * --------------------------------空险列表end---------------------------------
 		 */
 		
+		passenger_infos = new ArrayList<PassengerInfo>();
+		for (int i = 0; i < 1; i++) {
+			PassengerInfo info = new PassengerInfo();
+			info.certNum="";
+			info.certType="身份证";
+			info.name="";
+			passenger_infos.add(info);
+		}		
+		/**
+		 * 乘机人列表
+		 */
+		lv_order_passengerInfo = (ListView)findViewById(R.id.lv_order_passengerInfo);
+		passengerAdapter = new OrderPassengerAdapter(this, passenger_infos, certType_positions);
+		lv_order_passengerInfo.setAdapter(passengerAdapter);
+		lv_order_insure.requestFocus();
 		
 		btn_order_morePassenger = (Button) findViewById(R.id.btn_order_morePassenger);
 		btn_order_morePassenger.setOnClickListener(this);
@@ -147,10 +149,7 @@ public class TicketOrderActivity extends BaseActivity{
 		 * 增加乘客人
 		 */
 		case R.id.btn_order_morePassenger:
-			passenger_list_data.add(0);
-			certType_positions.append(passenger_list_data.size()-1, 0);
-			passengerAdapter.setType_positions(certType_positions);
-			passengerAdapter.setItemCount(passenger_list_data);
+			passenger_infos.add(new PassengerInfo());
 			/**
 			 * 在乘机人adapter刷新前，让空险列表（或其他列表）获取焦点，这样就导致乘机人的editText失去焦点，从而数据不改变。
 			 */
@@ -204,7 +203,7 @@ public class TicketOrderActivity extends BaseActivity{
 			     LinearLayout layout = (LinearLayout)lv_order_passengerInfo.getChildAt(i);// 获得子item的layout
 			     EditText et_order_passengers = (EditText) layout.findViewById(R.id.et_order_passengers);// 从layout中获得控件,根据其id
 			     EditText et_order_certNum = (EditText) layout.findViewById(R.id.et_order_certNum);//或者根据位置,在这我假设TextView在前，EditText在后
-			     TextView tv_order_certType = (TextView) layout.findViewById(R.id.tv_order_cert);
+			     TextView tv_order_certType = (TextView) layout.findViewById(R.id.tv_order_certType);
 			     Log.e(getTAG(), "name="+et_order_passengers.getText().toString()+
 			    		 ",cert_num ="+et_order_certNum.getText().toString()+
 			    		 ",certType="+tv_order_certType.getText());
@@ -246,11 +245,14 @@ public class TicketOrderActivity extends BaseActivity{
 			case REQUEST_CODE_CERTIFICATE:
 				int type_position = data.getIntExtra(TYPE_POSITION_KEY, 0);
 				int view_position = data.getIntExtra(TYPE_VIEW_POSITION_KEY, 0);
-				
-				showTip("type_position="+type_position+",view_position="+view_position);
-				certType_positions.put(view_position, type_position); 
-				
-				passengerAdapter.setCertType(view_position, type_position);
+				String certType = data.getStringExtra(TYPE_CERT_KEY);
+				passenger_infos.get(view_position).certType = certType;
+				passenger_infos.get(view_position).cert_position = type_position;
+				/**
+				 * 在乘机人adapter刷新前，让空险列表（或其他列表）获取焦点，这样就导致乘机人的editText失去焦点，从而数据不改变。
+				 */
+				lv_order_insure.requestFocus();
+				passengerAdapter.notifyDataSetChanged();
 				break;
 				
 			case REQUEST_CODE_DISTRIBUTE:
