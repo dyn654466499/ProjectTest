@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:orientation="horizontal" 
-        android:background="@color/bg_gray"
+        android:background="@color/ticket_bg_gray"
         android:gravity="center_vertical"
         >
  
@@ -18,7 +18,7 @@
             android:layout_marginLeft="15dp"
             android:text="label年"
             android:textSize="16sp"
-            android:textColor="@color/font_gray" />
+            android:textColor="@color/ticket_font_gray" />
 
         <TextView
             android:id="@+id/tv_cal_month"
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:text="label月"
             android:textSize="16sp"
-            android:textColor="@color/font_gray" />
+            android:textColor="@color/ticket_font_gray" />
     </LinearLayout>
 
 </LinearLayout>

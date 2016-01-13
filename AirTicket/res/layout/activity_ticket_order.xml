@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="9"
-        android:background="@color/bg_gray"
+        android:background="@color/ticket_bg_gray"
         android:scrollbars="vertical" >
 
         <LinearLayout
@@ -51,7 +51,7 @@
                 android:gravity="center_vertical|left"
                 android:padding="15dp"
                 android:text="@string/order_add_passengers"
-                android:textColor="@color/title_color"
+                android:textColor="@color/ticket_title_color"
                 android:textSize="15dp" />
             <!-- 空险列表 -->
 
@@ -87,7 +87,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight="3"
                         android:text="联系手机"
-                        android:textColor="@color/black"
+                        android:textColor="@color/ticket_black"
                         android:textSize="16sp" />
 
                     <com.daemon.customview.CustomEditText
@@ -118,7 +118,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight="3"
                         android:text="联系邮箱"
-                        android:textColor="@color/black"
+                        android:textColor="@color/ticket_black"
                         android:textSize="16sp" />
 
                     <com.daemon.customview.CustomEditText
@@ -151,7 +151,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="3"
                     android:text="配送方式"
-                    android:textColor="@color/black"
+                    android:textColor="@color/ticket_black"
                     android:textSize="16sp" />
 
                 <Button
@@ -165,7 +165,7 @@
                     android:gravity="left|center_vertical"
                     android:paddingRight="15dp"
                     android:text="不需要报销凭证"
-                    android:textColor="@color/black"
+                    android:textColor="@color/ticket_black"
                     android:textSize="16sp" />
             </LinearLayout>
             <!-- 配送详情 -->
@@ -193,7 +193,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight="3"
                         android:text="发票抬头"
-                        android:textColor="@color/black"
+                        android:textColor="@color/ticket_black"
                         android:textSize="16sp" />
 
                     <com.daemon.customview.CustomEditText
@@ -222,7 +222,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight="3"
                         android:text="收件人"
-                        android:textColor="@color/black"
+                        android:textColor="@color/ticket_black"
                         android:textSize="16sp" />
 
                     <com.daemon.customview.CustomEditText
@@ -251,7 +251,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight="3"
                         android:text="所在城市"
-                        android:textColor="@color/black"
+                        android:textColor="@color/ticket_black"
                         android:textSize="16sp" />
 
                     <Button
@@ -265,7 +265,7 @@
                         android:gravity="center_vertical|left"
                         android:hint="请选择所在城市"
                         android:paddingRight="15dp"
-                        android:textColor="@color/font_gray"
+                        android:textColor="@color/ticket_font_gray"
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -282,7 +282,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight="3"
                         android:text="详细地址"
-                        android:textColor="@color/black"
+                        android:textColor="@color/ticket_black"
                         android:textSize="16sp" />
 
                     <com.daemon.customview.CustomEditText
@@ -311,7 +311,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight="3"
                         android:text="收件人手机"
-                        android:textColor="@color/black"
+                        android:textColor="@color/ticket_black"
                         android:textSize="16sp" />
 
                     <com.daemon.customview.CustomEditText
@@ -338,10 +338,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/title_color"
+        android:background="@color/ticket_title_color"
         android:orientation="horizontal" >
 
         <TextView
+            android:id="@+id/tv_order_total"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
@@ -363,7 +364,7 @@
                 android:layout_centerInParent="true"
                 android:background="#ffffff"
                 android:text="@string/order_commit"
-                android:textColor="@color/title_color"
+                android:textColor="@color/ticket_title_color"
                 android:textSize="@dimen/button_textSize" />
         </RelativeLayout>
     </LinearLayout>

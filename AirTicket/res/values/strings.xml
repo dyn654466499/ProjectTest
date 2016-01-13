@@ -60,7 +60,7 @@
     </string-array>
     
     <!-- 机票订单 -->
-    <string name="order_peopleAndPrice">共%1$s人，总计%2$s￥</string>
+    <string name="order_peopleAndPrice">共%1$s人，总计￥%2$s</string>
     <string name="order_name">姓名</string>
     <string name="order_passengers">乘机人姓名</string>
     <string name="order_cert">身份证</string>
@@ -83,6 +83,8 @@
     <string name="title_endorse">签转条件</string>
     <string name="endorse_desc">不得签转</string>
     
+    <!-- 提示 -->
+    <string name="tips_exitOrder">您正在填写订单，是否要退出？</string>
     <string-array name="CityTags">
         <item>热门</item>
         <item>A</item>

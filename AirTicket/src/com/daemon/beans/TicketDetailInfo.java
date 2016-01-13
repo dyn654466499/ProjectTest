@@ -1,6 +1,8 @@
 package com.daemon.beans;
 
-public class TicketDetailInfo {
+
+public class TicketDetailInfo extends TicketInfo{
+	
 	/**
 	 * 价格
 	 */

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_gray"
+    android:background="@color/ticket_bg_gray"
     android:gravity="center_vertical" >
 
     <LinearLayout
@@ -18,7 +18,7 @@
             android:padding="5dp"
             android:layout_marginLeft="10dp"
             android:text="Test"
-            android:textColor="@color/font_gray"
+            android:textColor="@color/ticket_font_gray"
             android:textSize="15sp" />
     </LinearLayout>
 

@@ -193,9 +193,9 @@ public class OrderPassengerAdapter extends BaseAdapter{
 			public void onFocusChange(View v, boolean hasFocus) {
 				// TODO Auto-generated method stub
 				if(hasFocus){
-					holder.btn_order_deleteItem.setTextColor(activity.getResources().getColor(R.color.title_color));
+					holder.btn_order_deleteItem.setTextColor(activity.getResources().getColor(R.color.ticket_title_color));
 				}else{
-					holder.btn_order_deleteItem.setTextColor(activity.getResources().getColor(R.color.font_gray));
+					holder.btn_order_deleteItem.setTextColor(activity.getResources().getColor(R.color.ticket_font_gray));
 				}
 			}
 		});
@@ -205,9 +205,9 @@ public class OrderPassengerAdapter extends BaseAdapter{
 			public void onFocusChange(View v, boolean hasFocus) {
 				// TODO Auto-generated method stub
 				if(hasFocus){
-					holder.btn_order_deleteItem.setTextColor(activity.getResources().getColor(R.color.title_color));
+					holder.btn_order_deleteItem.setTextColor(activity.getResources().getColor(R.color.ticket_title_color));
 				}else{
-					holder.btn_order_deleteItem.setTextColor(activity.getResources().getColor(R.color.font_gray));
+					holder.btn_order_deleteItem.setTextColor(activity.getResources().getColor(R.color.ticket_font_gray));
 				}
 			}
 		});

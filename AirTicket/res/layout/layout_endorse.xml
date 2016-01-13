@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_gray"
+    android:background="@color/ticket_bg_gray"
     android:orientation="vertical" >
 
     <include layout="@layout/layout_title" />
@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/title_endorse_refund"
-            android:textColor="@color/black"
+            android:textColor="@color/ticket_black"
             android:textSize="@dimen/layout_title" />
 
         <TextView
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/endorse_refund_desc"
-            android:textColor="@color/black"
+            android:textColor="@color/ticket_black"
             android:textSize="15sp" />
 
         <TextView
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="@string/title_endorse_change"
-            android:textColor="@color/black"
+            android:textColor="@color/ticket_black"
             android:textSize="@dimen/layout_title" />
 
         <TextView
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/endorse_change_desc"
-            android:textColor="@color/black"
+            android:textColor="@color/ticket_black"
             android:textSize="15sp" />
 
         <TextView
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="@string/title_endorse"
-            android:textColor="@color/black"
+            android:textColor="@color/ticket_black"
             android:textSize="@dimen/layout_title" />
 
         <TextView
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/endorse_desc"
-            android:textColor="@color/black"
+            android:textColor="@color/ticket_black"
             android:textSize="15sp" />
     </LinearLayout>
 

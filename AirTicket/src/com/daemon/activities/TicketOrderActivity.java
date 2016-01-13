@@ -14,6 +14,7 @@ import com.daemon.airticket.R;
 import com.daemon.beans.PassengerInfo;
 import com.daemon.beans.TicketInfo;
 import com.daemon.interfaces.Commands;
+import com.daemon.models.AirTicketModel;
 import com.daemon.utils.DialogUtil;
 import com.daemon.utils.ScreenUtil;
 
@@ -85,11 +86,16 @@ public class TicketOrderActivity extends BaseActivity{
 	 */
 	private ArrayList<PassengerInfo> passenger_infos;
 	
+	private TextView tv_order_total;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ticket_order);
+		
+		setModelDelegate(new AirTicketModel(handler));
+		setViewChangeListener(this);
 		
 		/**
 		 * --------------------------------空险列表start---------------------------------
@@ -180,8 +186,11 @@ public class TicketOrderActivity extends BaseActivity{
 		Button btn_back = (Button)findViewById(R.id.btn_back);
 		btn_back.setOnClickListener(this);
 		
-		ScrollView scrollView = (ScrollView)findViewById(R.id.sv_order);
-		scrollView.scrollTo(10, 10);
+		tv_order_total = (TextView)findViewById(R.id.tv_order_total);
+		tv_order_total.setText(String.format(
+				getString(R.string.order_peopleAndPrice),
+				String.valueOf(passenger_infos.size()),
+				"1350"));
 	}
 
 	@Override
@@ -201,7 +210,9 @@ public class TicketOrderActivity extends BaseActivity{
 
 			passengerAdapter.notifyDataSetChanged();
 			break;
-	
+		/**	
+		  * 返回
+		  */
 		case R.id.btn_back:
 			DialogUtil.showDialog(TicketOrderActivity.this, getString(R.string.title_order_edit), "您正在填写订单，是否要退出？", new Commands() {
 				
@@ -258,7 +269,7 @@ public class TicketOrderActivity extends BaseActivity{
 		// TODO Auto-generated method stub
 		switch (keyCode) {
 		case KeyEvent.KEYCODE_BACK:
-            DialogUtil.showDialog(TicketOrderActivity.this, getString(R.string.title_order_edit), "您正在填写订单，是否要退出？", new Commands() {
+            DialogUtil.showDialog(TicketOrderActivity.this, getString(R.string.title_order_edit), getString(R.string.tips_exitOrder), new Commands() {
 				
 				@Override
 				public void executeCommand() {
@@ -280,6 +291,9 @@ public class TicketOrderActivity extends BaseActivity{
 		super.onActivityResult(requestCode, resultCode, data);
 		if(resultCode == RESULT_OK){
 			switch (requestCode) {
+			/**
+			 * 如果是证书请求码
+			 */
 			case REQUEST_CODE_CERTIFICATE:
 				int type_position = data.getIntExtra(TYPE_POSITION_KEY, 0);
 				int view_position = data.getIntExtra(TYPE_VIEW_POSITION_KEY, 0);
@@ -292,7 +306,9 @@ public class TicketOrderActivity extends BaseActivity{
 				lv_order_insure.requestFocus();
 				passengerAdapter.notifyDataSetChanged();
 				break;
-				
+			/**
+			  * 如果是配送请求码
+			  */	
 			case REQUEST_CODE_DISTRIBUTE:
 				position_destribute = data.getIntExtra(TYPE_POSITION_KEY, 0);
 				if(position_destribute == 0){
@@ -319,7 +335,7 @@ public class TicketOrderActivity extends BaseActivity{
 				break;
 			
 			case REQUEST_CODE_CITY:
-				btn_order_city.setTextColor(getResources().getColor(R.color.black));
+				btn_order_city.setTextColor(getResources().getColor(R.color.ticket_black));
 				btn_order_city.setText(data.getStringExtra(KEY_CITY));
 				break;
 				

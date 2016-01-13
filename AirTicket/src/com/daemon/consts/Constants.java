@@ -21,6 +21,8 @@ public class Constants {
 	
 	public static final String KEY_INSURE_PRICE = "保险价格";
 	public static final String KEY_INSURE_NAME = "保险名称";
+	
+	public static final String KEY_PARCELABLE = "parcelable";
 	/**
 	 * activity的result code
 	 */

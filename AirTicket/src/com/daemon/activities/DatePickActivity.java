@@ -83,6 +83,7 @@ public class DatePickActivity extends BaseActivity {
 		 * 设置加载界面
 		 */
 		AutoLoadingUtil.setAutoLoadingView(linearLayout_date_pick);
+		AutoLoadingUtil.setBackground(getResources().getColor(R.color.ticket_bg_gray));
 		
 		Button btn_back = (Button) findViewById(R.id.btn_back);
 		btn_back.setOnClickListener(this);
@@ -231,7 +232,7 @@ public class DatePickActivity extends BaseActivity {
 		StateListDrawable localStateListDrawable = new StateListDrawable();
 		ColorDrawable localColorDrawable1 = new ColorDrawable(
 				mContext.getResources().getColor(android.R.color.transparent));
-		Drawable localColorDrawable2 = new ColorDrawable(mContext.getResources().getColor(R.color.title_color));
+		Drawable localColorDrawable2 = new ColorDrawable(mContext.getResources().getColor(R.color.ticket_title_color));
 		ColorDrawable localColorDrawable3 = new ColorDrawable(
 				mContext.getResources().getColor(android.R.color.transparent));
 		localStateListDrawable.addState(new int[] { pressed, enabled }, localColorDrawable2);

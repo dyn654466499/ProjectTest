@@ -15,7 +15,7 @@
         android:gravity="center_vertical"
         android:layout_gravity="center_vertical"
         android:text="标题"
-        android:textColor="@color/black"
+        android:textColor="@color/ticket_black"
         android:textSize="16sp" />
     
     <ImageButton 
@@ -37,7 +37,7 @@
         android:gravity="center_vertical"
         android:layout_gravity="center_vertical"
         android:text="$40"
-        android:textColor="@color/title_color"
+        android:textColor="@color/ticket_title_color"
         android:textSize="14sp" />
         
       <TextView
@@ -46,7 +46,7 @@
         android:gravity="center_vertical"
         android:layout_gravity="center_vertical"
         android:text="/份"
-        android:textColor="@color/font_gray"
+        android:textColor="@color/ticket_font_gray"
         android:textSize="14sp" />
       
      <TextView

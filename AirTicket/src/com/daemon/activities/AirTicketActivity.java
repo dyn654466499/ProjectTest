@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.daemon.adapters.SelectAdapter;
 import com.daemon.airticket.R;
+import com.daemon.beans.TicketInfo;
 
 
 import static com.daemon.consts.Constants.*;
@@ -133,7 +134,7 @@ public class AirTicketActivity extends BaseActivity {
          */
 		case R.id.btn_airticket_oneWay:
 			btn_airticket_oneWay.setSelected(true);
-			btn_airticket_oneWay.setTextColor(getResources().getColor(R.color.title_color));
+			btn_airticket_oneWay.setTextColor(getResources().getColor(R.color.ticket_title_color));
 			
 			btn_airticket_goAndBack.setSelected(false);
 			btn_airticket_goAndBack.setTextColor(Color.WHITE);
@@ -146,7 +147,7 @@ public class AirTicketActivity extends BaseActivity {
 			btn_airticket_oneWay.setTextColor(Color.WHITE);
 			
 			btn_airticket_goAndBack.setSelected(true);
-			btn_airticket_goAndBack.setTextColor(getResources().getColor(R.color.title_color));
+			btn_airticket_goAndBack.setTextColor(getResources().getColor(R.color.ticket_title_color));
 			
 			linearLayout_airticket_backDate.setVisibility(View.VISIBLE);
 			break;
@@ -188,7 +189,12 @@ public class AirTicketActivity extends BaseActivity {
 		case R.id.btn_airticket_search:
 			String city_leave = btn_airticket_leave.getText().toString();
 			String city_arrive = btn_airticket_arrive.getText().toString();
+			String date_leave = btn_airticket_date.getText().toString();
+			
+			TicketInfo info = new TicketInfo();
+			info.takeOffDate = date_leave;
             intent = new Intent(AirTicketActivity.this,TicketResultActivity.class);
+            intent.putExtra(KEY_PARCELABLE, info);
             startActivity(intent);
 			break;
 

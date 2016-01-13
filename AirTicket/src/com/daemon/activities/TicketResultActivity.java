@@ -18,6 +18,7 @@ import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import static com.daemon.consts.Constants.*;
 public class TicketResultActivity extends BaseActivity{
     private ExpandableListView elv_ticket_result;
     private List<TicketInfo> ticketInfos;
@@ -30,6 +31,9 @@ public class TicketResultActivity extends BaseActivity{
 		setContentView(R.layout.activity_ticket_result);
 		
 		TextView tv_title = (TextView)findViewById(R.id.tv_title);
+		TicketInfo intent_info = getIntent().getParcelableExtra(KEY_PARCELABLE);
+		tv_title.setText(intent_info.takeOffDate);
+				
 		
 		Button btn_back = (Button)findViewById(R.id.btn_back);
 		btn_back.setOnClickListener(this);

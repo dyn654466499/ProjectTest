@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_gray"
+    android:background="@color/ticket_bg_gray"
     android:orientation="vertical"
     tools:context="com.daemon.airticket.MainActivity" >
 
@@ -12,7 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
-        android:background="@color/title_color"
+        android:background="@color/ticket_title_color"
         android:padding="10dp"
         >
 
@@ -80,7 +80,7 @@
                         android:layout_weight="2"
                         android:gravity="center_vertical|right"
                         android:text="出发城市"
-                        android:textColor="@color/font_gray"
+                        android:textColor="@color/ticket_font_gray"
                         android:textSize="@dimen/button_textSize" />
 
                     <Button
@@ -94,7 +94,7 @@
                         android:gravity="left|center_vertical"
                         android:paddingLeft="22dp"
                         android:text="宁波"
-                        android:textColor="@color/black"
+                        android:textColor="@color/ticket_black"
                         android:textSize="@dimen/layout_title" />
                 </LinearLayout>
 
@@ -112,7 +112,7 @@
                         android:layout_weight="2"
                         android:gravity="center_vertical|right"
                         android:text="到达城市"
-                        android:textColor="@color/font_gray"
+                        android:textColor="@color/ticket_font_gray"
                         android:textSize="@dimen/button_textSize" />
 
                     <Button
@@ -126,7 +126,7 @@
                         android:gravity="left|center_vertical"
                         android:paddingLeft="22dp"
                         android:text="北京"
-                        android:textColor="@color/black"
+                        android:textColor="@color/ticket_black"
                         android:textSize="@dimen/layout_title" />
                 </LinearLayout>
             </LinearLayout>
@@ -160,7 +160,7 @@
                 android:layout_weight="2"
                 android:gravity="center_vertical|right"
                 android:text="出发日期"
-                android:textColor="@color/font_gray"
+                android:textColor="@color/ticket_font_gray"
                 android:textSize="@dimen/button_textSize" />
 
             <Button
@@ -175,7 +175,7 @@
                 android:paddingLeft="22dp"
                 android:paddingRight="15dp"
                 android:text="3月2日"
-                android:textColor="@color/black"
+                android:textColor="@color/ticket_black"
                 android:textSize="@dimen/layout_title" />
         </LinearLayout>
 
@@ -195,7 +195,7 @@
                 android:layout_weight="2"
                 android:gravity="center_vertical|right"
                 android:text="返回日期"
-                android:textColor="@color/font_gray"
+                android:textColor="@color/ticket_font_gray"
                 android:textSize="@dimen/button_textSize" />
 
             <Button
@@ -210,7 +210,7 @@
                 android:paddingLeft="22dp"
                 android:paddingRight="15dp"
                 android:text="3月4日"
-                android:textColor="@color/black"
+                android:textColor="@color/ticket_black"
                 android:textSize="@dimen/layout_title" />
         </LinearLayout>
         
@@ -227,7 +227,7 @@
                 android:layout_weight="2"
                 android:gravity="center_vertical|right"
                 android:text="舱位"
-                android:textColor="@color/font_gray"
+                android:textColor="@color/ticket_font_gray"
                 android:textSize="@dimen/button_textSize" />
 
             <Button
@@ -242,7 +242,7 @@
                 android:paddingLeft="22dp"
                 android:paddingRight="15dp"
                 android:text="经济舱"
-                android:textColor="@color/black"
+                android:textColor="@color/ticket_black"
                 android:textSize="@dimen/layout_title" />
         </LinearLayout>
     </LinearLayout>
@@ -254,7 +254,7 @@
         android:layout_height="45dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:background="@color/title_color"
+        android:background="@drawable/ticket_btn_selector"
         android:text="@string/button_search"
         android:textColor="#ffffff"
         android:textSize="@dimen/button_textSize" />

@@ -50,7 +50,7 @@ public class SelectAdapter extends ArrayAdapter<String>{
 			TextView textView = (TextView)convertView;
 			textView.setText(getItem(position));
 			if(click_position == position){
-				textView.setTextColor(getContext().getResources().getColor(R.color.title_color));
+				textView.setTextColor(getContext().getResources().getColor(R.color.ticket_title_color));
 				textView.setCompoundDrawablesWithIntrinsicBounds(null, 
 						null, 
 						getContext().getResources().getDrawable(R.drawable.ic_duigou_lan), 
