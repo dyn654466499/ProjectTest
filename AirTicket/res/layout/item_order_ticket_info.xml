@@ -18,10 +18,9 @@
             android:id="@+id/tv_order_ticket_airline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="南方航空公司"
+            android:text="东方航空 MU5214"
             android:textColor="@color/black"
             android:textSize="12sp" />
-
 
         <RelativeLayout
             android:id="@+id/relativeLayout_order_ticket"
@@ -59,8 +58,8 @@
                         android:id="@+id/tv_order_ticket_dancheng"
                         android:layout_width="0dp"
                         android:layout_height="6dp"
-                        android:layout_weight="1"
                         android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
                         android:background="@null"
                         android:focusable="false"
                         android:src="@drawable/dancheng_da" />
@@ -77,15 +76,14 @@
                         android:textSize="24sp" />
                 </LinearLayout>
 
-                <!-- 价格 -->
-                <!-- 起飞机场 -->
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/linearLayout_ticket_result"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal" >
+
+                    <!-- 起飞机场 -->
 
                     <TextView
                         android:id="@+id/tv_order_ticket_takeOffPort"
@@ -96,12 +94,13 @@
                         android:text="宁波烁社机场"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
-                    <!-- 降落机场 -->
-                    <LinearLayout 
+
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        />
+                        android:layout_weight="1" />
+                    <!-- 降落机场 -->
+
                     <TextView
                         android:id="@+id/tv_order_ticket_landingPort"
                         android:layout_width="0dp"
@@ -114,42 +113,68 @@
                 </LinearLayout>
             </RelativeLayout>
         </RelativeLayout>
-        <!-- 折扣 -->
 
         <LinearLayout
             android:id="@+id/linearLayout_order_price"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/relativeLayout_order_ticket"
             android:layout_below="@id/relativeLayout_order_ticket"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal"
-             >
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal" >
 
-            <!-- 航空公司名 -->
+            <!-- 舱位价格 -->
 
             <TextView
                 android:id="@+id/tv_order_ticket_spaceType"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="东方航空 MU5214"
+                android:layout_weight="2"
+                android:text="头等舱￥1350"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
+            <!-- 机场建设价格 -->
+
+            <TextView
+                android:id="@+id/tv_order_ticket_airPortBuildPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="民航基金￥50"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <!-- 燃油价格 -->
+
+            <TextView
+                android:id="@+id/tv_order_ticket_oilPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="燃油￥0"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5" >
+
+                <!-- 退改签说明 -->
+
+                <Button
+                    android:id="@+id/btn_order_endorse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@null"
+                    android:minHeight="15dp"
+                    android:text="@string/title_endorseOrBackDesc"
+                    android:textColor="@color/title_color"
+                    android:textSize="12sp" />
+            </RelativeLayout>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_order_endorse"
-            android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@id/linearLayout_order_price"
-            android:layout_below="@id/relativeLayout_order_ticket"
-            android:background="@null"
-            android:minHeight="15dp"
-            android:text="@string/title_endorseOrBackDesc"
-            android:textColor="@color/title_color"
-            android:textSize="12sp" />
+        <!-- 出发时间 -->
 
         <TextView
             android:id="@+id/tv_order_ticket_takeOffDate"
