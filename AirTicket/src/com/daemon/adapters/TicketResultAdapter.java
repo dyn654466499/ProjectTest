@@ -1,6 +1,5 @@
 package com.daemon.adapters;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -17,13 +16,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnGroupClickListener;
-import android.widget.ExpandableListView.OnGroupCollapseListener;
-import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.daemon.activities.TicketOrderActivity;
@@ -31,6 +24,7 @@ import com.daemon.airticket.R;
 import com.daemon.beans.TicketDetailInfo;
 import com.daemon.beans.TicketInfo;
 import com.daemon.utils.ImageUtil;
+import com.daemon.utils.VolleyUtil;
 
 public class TicketResultAdapter extends BaseExpandableListAdapter {
 	private Context mContext;
@@ -38,14 +32,6 @@ public class TicketResultAdapter extends BaseExpandableListAdapter {
 	private Drawable ic_xiangshang;
 	private List<TicketInfo> ticketInfos;
 	private List<TicketDetailInfo> ticketDetailInfos;
-	private Button btn_ticket_result_unfold_copy;
-	private int oldGroupPosition=-1;
-	
-	private List<ViewHolderGroup> groups;
-	
-	private LinearLayout layout_copy;
-	
-	private static int[] groupState = {0,1,0}; 
 	
 	public TicketResultAdapter(Context mContext, List<TicketInfo> ticketInfos,
 			List<TicketDetailInfo> ticketDetailInfos) {
@@ -57,8 +43,6 @@ public class TicketResultAdapter extends BaseExpandableListAdapter {
 				R.drawable.ic_xiangxia);
 		bitmap = ImageUtil.rotateBitmap(bitmap, 180);
 		ic_xiangshang = new BitmapDrawable(mContext.getResources(), bitmap);
-		groups = new ArrayList<TicketResultAdapter.ViewHolderGroup>();
-		
 	}
 
 	public void setExpandableListView(ExpandableListView params_elv) {
@@ -80,9 +64,6 @@ public class TicketResultAdapter extends BaseExpandableListAdapter {
 		return groupPosition;
 	}
 
-	public void setExpanded_position(int oldGroupPosition) {
-		this.oldGroupPosition = oldGroupPosition;
-	}
 
 	@Override
 	public View getGroupView(final int groupPosition,final boolean isExpanded,
@@ -110,9 +91,13 @@ public class TicketResultAdapter extends BaseExpandableListAdapter {
 					.findViewById(R.id.tv_ticket_result_airLine);
 			group.tv_ticket_result_amount = (TextView) convertView
 					.findViewById(R.id.tv_ticket_result_amount);
+			
 			group.imageView_ticket_result_airLine = (ImageView) convertView
 					.findViewById(R.id.imageView_ticket_result_airLine);
-			
+			VolleyUtil.loadImage(mContext,
+					group.imageView_ticket_result_airLine,
+					"http://avatar.csdn.net/6/6/D/1_lfdfhl.jpg"
+					);
 			convertView.setTag(group);
 		} else {
 			group = (ViewHolderGroup) convertView.getTag();
@@ -247,4 +232,6 @@ public class TicketResultAdapter extends BaseExpandableListAdapter {
 				tv_ticket_result_details_discount,
 				tv_ticket_result_details_price;
 	}
+	
+
 }

@@ -122,6 +122,8 @@ public class AirTicketActivity extends BaseActivity {
 		textView_title.setText(getString(R.string.title_airTicket));
 		
 		btn_airticket_oneWay.callOnClick();
+		
+		
 	}
 
 	@Override
