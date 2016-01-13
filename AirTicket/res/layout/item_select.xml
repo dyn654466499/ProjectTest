@@ -4,8 +4,8 @@
     android:layout_height="50dp"
     android:padding="10dp"
     android:gravity="center_vertical"
+    android:textColor="@color/black"
     android:textSize="18sp"
     android:text="TextView" >
-
     
 </TextView>

@@ -26,7 +26,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
-                <include layout="@layout/item_order_ticket_info"/>
+                <com.daemon.customview.ListViewForScrollView
+                    android:id="@+id/lv_order_ticketInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:dividerHeight="0.5dp" />
             </LinearLayout>
 
             <!-- 乘机人列表 -->
@@ -83,7 +87,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight="3"
                         android:text="联系手机"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <com.daemon.customview.CustomEditText
@@ -114,7 +118,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight="3"
                         android:text="联系邮箱"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <com.daemon.customview.CustomEditText
@@ -147,7 +151,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="3"
                     android:text="配送方式"
-                    android:textColor="#000000"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <Button
@@ -160,8 +164,8 @@
                     android:drawableRight="@drawable/ic_xiangyou"
                     android:gravity="left|center_vertical"
                     android:paddingRight="15dp"
-                    android:text="快递"
-                    android:textColor="#111111"
+                    android:text="不需要报销凭证"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
             </LinearLayout>
             <!-- 配送详情 -->
@@ -189,7 +193,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight="3"
                         android:text="发票抬头"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <com.daemon.customview.CustomEditText
@@ -218,7 +222,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight="3"
                         android:text="收件人"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <com.daemon.customview.CustomEditText
@@ -247,7 +251,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight="3"
                         android:text="所在城市"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <Button
@@ -278,7 +282,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight="3"
                         android:text="详细地址"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <com.daemon.customview.CustomEditText
@@ -307,7 +311,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight="3"
                         android:text="收件人手机"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <com.daemon.customview.CustomEditText

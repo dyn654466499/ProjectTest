@@ -94,6 +94,7 @@
                         android:gravity="left|center_vertical"
                         android:paddingLeft="22dp"
                         android:text="宁波"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/layout_title" />
                 </LinearLayout>
 
@@ -125,6 +126,7 @@
                         android:gravity="left|center_vertical"
                         android:paddingLeft="22dp"
                         android:text="北京"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/layout_title" />
                 </LinearLayout>
             </LinearLayout>
@@ -173,6 +175,7 @@
                 android:paddingLeft="22dp"
                 android:paddingRight="15dp"
                 android:text="3月2日"
+                android:textColor="@color/black"
                 android:textSize="@dimen/layout_title" />
         </LinearLayout>
 
@@ -207,6 +210,7 @@
                 android:paddingLeft="22dp"
                 android:paddingRight="15dp"
                 android:text="3月4日"
+                android:textColor="@color/black"
                 android:textSize="@dimen/layout_title" />
         </LinearLayout>
         
@@ -238,6 +242,7 @@
                 android:paddingLeft="22dp"
                 android:paddingRight="15dp"
                 android:text="经济舱"
+                android:textColor="@color/black"
                 android:textSize="@dimen/layout_title" />
         </LinearLayout>
     </LinearLayout>

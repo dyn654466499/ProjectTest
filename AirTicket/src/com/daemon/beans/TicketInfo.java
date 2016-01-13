@@ -4,6 +4,10 @@ import android.graphics.drawable.Drawable;
 
 public class TicketInfo {
 	/**
+	 * 起飞日期
+	 */
+   public String takeOffDate;
+	/**
 	 * 起飞时间
 	 */
    public String takeOffTime;
@@ -43,4 +47,12 @@ public class TicketInfo {
     * 是否展开的标识
     */
    public boolean isExpanded;
+   /**
+    * 燃油费
+    */
+   public String oilPrice;
+   /**
+    * 机场建设费
+    */
+   public String airPortBuildPrice;
 }

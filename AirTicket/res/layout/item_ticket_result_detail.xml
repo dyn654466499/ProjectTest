@@ -16,6 +16,7 @@
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
         android:text="经济舱"
+        android:textColor="@color/black"
         android:textSize="16sp" />
     <!-- 折扣 -->
 
@@ -27,6 +28,7 @@
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
         android:text="8折"
+        android:textColor="@color/black"
         android:textSize="16sp" />
     <!-- 价格 -->
 

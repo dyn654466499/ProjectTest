@@ -9,8 +9,10 @@ import java.util.Map;
 
 import com.daemon.adapters.OrderInsureAdapter;
 import com.daemon.adapters.OrderPassengerAdapter;
+import com.daemon.adapters.OrderTicketAdapter;
 import com.daemon.airticket.R;
 import com.daemon.beans.PassengerInfo;
+import com.daemon.beans.TicketInfo;
 import com.daemon.interfaces.Commands;
 import com.daemon.utils.DialogUtil;
 import com.daemon.utils.ScreenUtil;
@@ -36,32 +38,53 @@ import android.widget.TextView;
 
 
 import static com.daemon.consts.Constants.*;
+/**
+ * 机票订单界面
+ * @author 邓耀宁
+ *
+ */
 public class TicketOrderActivity extends BaseActivity{
-
-	private Button btn_order_morePassenger,
-	btn_order_destribute,
-	btn_order_endorse,
-	btn_order_city
-	; 
+	/**
+	 * 增加乘机人
+	 */
+	private Button btn_order_morePassenger;
+	/**
+	 * 配送方式按钮
+	 */
+	private Button btn_order_destribute;
+	/**
+	 * 城市选择
+	 */
+	private Button btn_order_city; 
 	/**
 	 * 保存各个乘机人的证件类型位置
 	 */
 	private SparseIntArray certType_positions;
-    /**
-     * 初始乘机人的人数
-     */
-	private int passenger_item_count = 0;
-	
+	/**
+	 * 记录配送方式位置
+	 */
 	private int position_destribute = 0;
+	/**
+	 * 乘机人适配器
+	 */
 	private OrderPassengerAdapter passengerAdapter;
-	
-	private EditText et_order_phoneNum,et_order_email;
-	
+	/**
+	 * 如果选择快递配送。则显示此界面
+	 */
 	private LinearLayout linearLayout_order_destribute;
-	
-	private ListView lv_order_passengerInfo,lv_order_insure;
-	
+	/**
+	 * 乘机人列表
+	 */
+	private ListView lv_order_passengerInfo;
+	/**
+	 * 空险列表
+	 */
+	private ListView lv_order_insure;
+	/**
+	 * 乘机人信息链表
+	 */
 	private ArrayList<PassengerInfo> passenger_infos;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -72,8 +95,6 @@ public class TicketOrderActivity extends BaseActivity{
 		 * --------------------------------空险列表start---------------------------------
 		 */
 		lv_order_insure = (ListView)findViewById(R.id.lv_order_insure);
-		
-		
 		String[] insures = getResources().getStringArray(R.array.TypeInsure);
 		List<Map<String, String>> data = new ArrayList<Map<String,String>>();
 		for (String insure : insures) {
@@ -84,7 +105,6 @@ public class TicketOrderActivity extends BaseActivity{
 		}
 		final OrderInsureAdapter insureAdapter = new OrderInsureAdapter(this, data);
 		lv_order_insure.setAdapter(insureAdapter);
-		
 		lv_order_insure.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -99,6 +119,9 @@ public class TicketOrderActivity extends BaseActivity{
 		 * --------------------------------空险列表end---------------------------------
 		 */
 		
+		/**
+		 * --------------------------------乘机人列表start---------------------------------
+		 */
 		passenger_infos = new ArrayList<PassengerInfo>();
 		for (int i = 0; i < 1; i++) {
 			PassengerInfo info = new PassengerInfo();
@@ -107,13 +130,37 @@ public class TicketOrderActivity extends BaseActivity{
 			info.name="";
 			passenger_infos.add(info);
 		}		
-		/**
-		 * 乘机人列表
-		 */
 		lv_order_passengerInfo = (ListView)findViewById(R.id.lv_order_passengerInfo);
 		passengerAdapter = new OrderPassengerAdapter(this, passenger_infos, certType_positions);
 		lv_order_passengerInfo.setAdapter(passengerAdapter);
 		lv_order_insure.requestFocus();
+		/**
+		 * --------------------------------乘机人列表end---------------------------------
+		 */
+		
+		/**
+		 * --------------------------------机票信息列表start---------------------------------
+		 */
+		ListView lv_order_ticketInfo = (ListView)findViewById(R.id.lv_order_ticketInfo);
+		ArrayList<TicketInfo> ticketInfos = new ArrayList<TicketInfo>();
+		TicketInfo info = new TicketInfo();
+		info.airLine = "南方航空";
+		info.oilPrice = "燃油￥"+"0";
+		info.airPortBuildPrice="民航基金￥"+"50";
+		info.price = "经济舱￥"+"1350";
+		info.takeOffDate = "2月8日";
+		info.takeOffPort = "吴圩机场";
+		info.takeOffTime = "12:00";
+		info.landingPort = "宝安机场";
+		info.landingTime = "16:30";
+		ticketInfos.add(info);
+
+		OrderTicketAdapter orderTicketAdapter = new OrderTicketAdapter(this, ticketInfos);
+		lv_order_ticketInfo.setAdapter(orderTicketAdapter);
+		/**
+		 * --------------------------------机票信息列表end---------------------------------
+		 */
+		
 		
 		btn_order_morePassenger = (Button) findViewById(R.id.btn_order_morePassenger);
 		btn_order_morePassenger.setOnClickListener(this);
@@ -121,14 +168,8 @@ public class TicketOrderActivity extends BaseActivity{
 		btn_order_destribute = (Button) findViewById(R.id.btn_order_destribute);
 		btn_order_destribute.setOnClickListener(this);
 		
-		et_order_phoneNum = (EditText)findViewById(R.id.et_order_phoneNum);
-		et_order_email = (EditText)findViewById(R.id.et_order_email);
-		
 		linearLayout_order_destribute = (LinearLayout)findViewById(R.id.linearLayout_order_destribute);
 		linearLayout_order_destribute.setVisibility(View.GONE);
-		
-		btn_order_endorse = (Button) findViewById(R.id.btn_order_endorse);
-		btn_order_endorse.setOnClickListener(this);
 		
 		Button btn_order_commit = (Button) findViewById(R.id.btn_order_commit);
 		btn_order_commit.setOnClickListener(this);
@@ -180,12 +221,6 @@ public class TicketOrderActivity extends BaseActivity{
 			intent.putExtra(TYPE_POSITION_KEY, position_destribute);
 			startActivityForResult(intent,REQUEST_CODE_DISTRIBUTE);
 			overridePendingTransition(0, 0);
-			break;
-		/**
-		 * 退改签说明	
-		 */
-		case R.id.btn_order_endorse:
-			startActivity(new Intent(TicketOrderActivity.this,EndorseActivity.class));
 			break;
 		/**
 		 * 如有配送方式，选择城市
@@ -284,7 +319,7 @@ public class TicketOrderActivity extends BaseActivity{
 				break;
 			
 			case REQUEST_CODE_CITY:
-				btn_order_city.setTextColor(Color.BLACK);
+				btn_order_city.setTextColor(getResources().getColor(R.color.black));
 				btn_order_city.setText(data.getStringExtra(KEY_CITY));
 				break;
 				
